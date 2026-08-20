@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+    /* App header spacing: adjust if your header height changes */
+    --header-height: 96px;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-cream text-clay font-body antialiased;
+  }
+
+  /* Ensure main content sits below the fixed header */
+  main#main-content {
+    padding-top: calc(var(--header-height) + 1rem);
+  }
+
+  ::selection {
+    @apply bg-terracotta/30 text-clay;
+  }
+}
+
+@layer components {
+  .glassmorphism {
+    @apply backdrop-blur-md bg-white/50 border border-white/20 shadow-xl;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .hover-lift {
+    @apply transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-2xl;
+  }
+
+  .btn-primary {
+    @apply px-8 py-4 bg-clay text-cream font-medium rounded-full
+           transition-all duration-300 ease-out
+           hover:bg-terracotta hover:scale-105
+           active:scale-95
+           focus:outline-none focus:ring-2 focus:ring-terracotta focus:ring-offset-2 focus:ring-offset-cream;
+  }
+
+  .btn-secondary {
+    @apply px-8 py-4 border-2 border-clay text-clay font-medium rounded-full
+           transition-all duration-300 ease-out
+           hover:bg-clay hover:text-cream
+           active:scale-95
+           focus:outline-none focus:ring-2 focus:ring-clay focus:ring-offset-2 focus:ring-offset-cream;
+  }
+
+  .input-field {
+    @apply w-full px-6 py-4 bg-cream border border-clay/20 rounded-full
+           text-clay placeholder:text-clay/40
+           focus:outline-none focus:border-terracotta focus:ring-2 focus:ring-terracotta/20
+           transition-all duration-300;
+  }
+
+  .section-container {
+    @apply max-w-7xl mx-auto px-6 sm:px-8 lg:px-12;
+  }
+}
+
+@layer utilities {
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .transform-style-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+}

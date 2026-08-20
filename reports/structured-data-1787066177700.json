@@ -1,0 +1,983 @@
+[
+  {
+    "url": "http://localhost:3000/",
+    "scripts": [
+      {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+              "@context": "https://schema.org",
+              "@type": "Product",
+              "name": "Terracotta Heritage Vase",
+              "description": "Exquisite hand-thrown terracotta vase crafted using traditional wood-firing techniques. Each piece features unique flame markings and develops a beautiful patina over time.",
+              "sku": "1",
+              "brand": {
+                "@type": "Brand",
+                "name": "Shikha Kalsi Arts"
+              },
+              "image": [
+                "https://shikhakalsiarts.com/assets/vase-1-main.jpg",
+                "https://shikhakalsiarts.com/assets/vase-1-detail-1.jpg",
+                "https://shikhakalsiarts.com/assets/vase-1-detail-2.jpg"
+              ],
+              "offers": {
+                "@type": "Offer",
+                "url": "https://shikhakalsiarts.com/shop/terracotta-heritage-vase",
+                "priceCurrency": "USD",
+                "price": 485,
+                "availability": "https://schema.org/InStock",
+                "seller": {
+                  "@type": "Organization",
+                  "name": "Shikha Kalsi Arts"
+                }
+              },
+              "material": "Red Terracotta Clay",
+              "color": "Natural unglazed with wood-fire markings",
+              "weight": {
+                "@type": "QuantitativeValue",
+                "value": 2.4,
+                "unitCode": "KGM"
+              },
+              "dimensions": {
+                "@type": "QuantitativeValue",
+                "height": "32 cm",
+                "width": "18 cm",
+                "depth": "18 cm"
+              },
+              "additionalProperty": [
+                {
+                  "@type": "PropertyValue",
+                  "name": "Firing Temperature",
+                  "value": "1150°C (Wood-fired)"
+                },
+                {
+                  "@type": "PropertyValue",
+                  "name": "Category",
+                  "value": "Vases"
+                },
+                {
+                  "@type": "PropertyValue",
+                  "name": "Finish",
+                  "value": "Natural unglazed with wood-fire markings"
+                }
+              ],
+              "isVariantOf": {
+                "@type": "ProductModel",
+                "name": "Vases Collection"
+              }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+              "@context": "https://schema.org",
+              "@type": "Product",
+              "name": "Sculptural Earth Form",
+              "description": "Limited edition abstract sculpture hand-coiled from stoneware clay. Raw unglazed surface reveals natural clay texture. Edition of 5.",
+              "sku": "2",
+              "brand": {
+                "@type": "Brand",
+                "name": "Shikha Kalsi Arts"
+              },
+              "image": [
+                "https://shikhakalsiarts.com/assets/sculpture-1-main.jpg",
+                "https://shikhakalsiarts.com/assets/sculpture-1-detail-1.jpg",
+                "https://shikhakalsiarts.com/assets/sculpture-1-detail-2.jpg"
+              ],
+              "offers": {
+                "@type": "Offer",
+                "url": "https://shikhakalsiarts.com/shop/sculptural-earth-form",
+                "priceCurrency": "USD",
+                "price": 1250,
+                "availability": "https://schema.org/LimitedAvailability",
+                "seller": {
+                  "@type": "Organization",
+                  "name": "Shikha Kalsi Arts"
+                },
+                "eligibleQuantity": {
+                  "@type": "QuantitativeValue",
+                  "value": 5
+                }
+              },
+              "material": "Stoneware Clay with Grog",
+              "color": "Natural unglazed, raw clay surface",
+              "weight": {
+                "@type": "QuantitativeValue",
+                "value": 5.8,
+                "unitCode": "KGM"
+              },
+              "dimensions": {
+                "@type": "QuantitativeValue",
+                "height": "45 cm",
+                "width": "28 cm",
+                "depth": "22 cm"
+              },
+              "additionalProperty": [
+                {
+                  "@type": "PropertyValue",
+                  "name": "Firing Temperature",
+                  "value": "1280°C (Electric kiln)"
+                },
+                {
+                  "@type": "PropertyValue",
+                  "name": "Category",
+                  "value": "Sculptures"
+                },
+                {
+                  "@type": "PropertyValue",
+                  "name": "Finish",
+                  "value": "Natural unglazed, raw clay surface"
+                },
+                {
+                  "@type": "PropertyValue",
+                  "name": "Edition",
+                  "value": "1 of 5"
+                }
+              ]
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "item": {
+              "@context": "https://schema.org",
+              "@type": "Product",
+              "name": "Artisanal Tea Ceremony Set",
+              "description": "Handcrafted 7-piece tea ceremony set including teapot, cups, cooling bowl, and caddy. Celadon glaze with beautiful thrown ring details. Cone 10 fired for durability.",
+              "sku": "3",
+              "brand": {
+                "@type": "Brand",
+                "name": "Shikha Kalsi Arts"
+              },
+              "image": [
+                "https://shikhakalsiarts.com/assets/tea-set-1-main.jpg",
+                "https://shikhakalsiarts.com/assets/tea-set-1-detail-1.jpg",
+                "https://shikhakalsiarts.com/assets/tea-set-1-detail-2.jpg"
+              ],
+              "offers": {
+                "@type": "Offer",
+                "url": "https://shikhakalsiarts.com/shop/artisanal-tea-set",
+                "priceCurrency": "USD",
+                "price": 680,
+                "availability": "https://schema.org/InStock",
+                "seller": {
+                  "@type": "Organization",
+                  "name": "Shikha Kalsi Arts"
+                }
+              },
+              "material": "Porcelain Stoneware",
+              "color": "Celadon glaze with thrown ring details",
+              "weight": {
+                "@type": "QuantitativeValue",
+                "value": 3.2,
+                "unitCode": "KGM"
+              },
+              "dimensions": {
+                "@type": "QuantitativeValue",
+                "height": "15 cm (teapot)",
+                "width": "22 cm (teapot)",
+                "depth": "16 cm (teapot)"
+              },
+              "additionalProperty": [
+                {
+                  "@type": "PropertyValue",
+                  "name": "Firing Temperature",
+                  "value": "1300°C (Reduction)"
+                },
+                {
+                  "@type": "PropertyValue",
+                  "name": "Category",
+                  "value": "Tableware"
+                },
+                {
+                  "@type": "PropertyValue",
+                  "name": "Finish",
+                  "value": "Celadon glaze with thrown ring details"
+                }
+              ],
+              "isVariantOf": {
+                "@type": "ProductModel",
+                "name": "Tableware Collection"
+              }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 4,
+            "item": {
+              "@context": "https://schema.org",
+              "@type": "Product",
+              "name": "Moon Jar - Limited Edition",
+              "description": "Exquisite limited edition moon jar inspired by Korean Joseon dynasty. Two-piece thrown construction with milky white glaze and iron speckling. Only 8 pieces worldwide.",
+              "sku": "4",
+              "brand": {
+                "@type": "Brand",
+                "name": "Shikha Kalsi Arts"
+              },
+              "image": [
+                "https://shikhakalsiarts.com/assets/moon-jar-1-main.jpg",
+                "https://shikhakalsiarts.com/assets/moon-jar-1-detail-1.jpg",
+                "https://shikhakalsiarts.com/assets/moon-jar-1-detail-2.jpg"
+              ],
+              "offers": {
+                "@type": "Offer",
+                "url": "https://shikhakalsiarts.com/shop/moon-jar-limited",
+                "priceCurrency": "USD",
+                "price": 3500,
+                "availability": "https://schema.org/LimitedAvailability",
+                "seller": {
+                  "@type": "Organization",
+                  "name": "Shikha Kalsi Arts"
+                },
+                "eligibleQuantity": {
+                  "@type": "QuantitativeValue",
+                  "value": 8
+                }
+              },
+              "material": "High-fire Porcelain",
+              "color": "Milky white glaze with iron speckling",
+              "weight": {
+                "@type": "QuantitativeValue",
+                "value": 8.5,
+                "unitCode": "KGM"
+              },
+              "dimensions": {
+                "@type": "QuantitativeValue",
+                "height": "38 cm",
+                "width": "36 cm",
+                "depth": "36 cm"
+              },
+              "additionalProperty": [
+                {
+                  "@type": "PropertyValue",
+                  "name": "Firing Temperature",
+                  "value": "1320°C (Reduction)"
+                },
+                {
+                  "@type": "PropertyValue",
+                  "name": "Category",
+                  "value": "Limited Editions"
+                },
+                {
+                  "@type": "PropertyValue",
+                  "name": "Finish",
+                  "value": "Milky white glaze with iron speckling"
+                },
+                {
+                  "@type": "PropertyValue",
+                  "name": "Edition",
+                  "value": "1 of 8"
+                }
+              ]
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 5,
+            "item": {
+              "@context": "https://schema.org",
+              "@type": "Product",
+              "name": "Organic Form Vase - Series I",
+              "description": "Contemporary hand-built vase using slab construction for organic asymmetrical forms. Layered matte and satin glazes create landscape-like surface effects.",
+              "sku": "5",
+              "brand": {
+                "@type": "Brand",
+                "name": "Shikha Kalsi Arts"
+              },
+              "image": [
+                "https://shikhakalsiarts.com/assets/vase-2-main.jpg",
+                "https://shikhakalsiarts.com/assets/vase-2-detail-1.jpg",
+                "https://shikhakalsiarts.com/assets/vase-2-detail-2.jpg"
+              ],
+              "offers": {
+                "@type": "Offer",
+                "url": "https://shikhakalsiarts.com/shop/organic-form-vase-series",
+                "priceCurrency": "USD",
+                "price": 520,
+                "availability": "https://schema.org/InStock",
+                "seller": {
+                  "@type": "Organization",
+                  "name": "Shikha Kalsi Arts"
+                }
+              },
+              "material": "White Stoneware",
+              "color": "Layered matte and satin glazes",
+              "weight": {
+                "@type": "QuantitativeValue",
+                "value": 2.1,
+                "unitCode": "KGM"
+              },
+              "dimensions": {
+                "@type": "QuantitativeValue",
+                "height": "28 cm",
+                "width": "20 cm",
+                "depth": "16 cm"
+              },
+              "additionalProperty": [
+                {
+                  "@type": "PropertyValue",
+                  "name": "Firing Temperature",
+                  "value": "1260°C (Oxidation)"
+                },
+                {
+                  "@type": "PropertyValue",
+                  "name": "Category",
+                  "value": "Vases"
+                },
+                {
+                  "@type": "PropertyValue",
+                  "name": "Finish",
+                  "value": "Layered matte and satin glazes"
+                }
+              ],
+              "isVariantOf": {
+                "@type": "ProductModel",
+                "name": "Vases Collection"
+              }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 6,
+            "item": {
+              "@context": "https://schema.org",
+              "@type": "Product",
+              "name": "Ritual Bowl Collection",
+              "description": "Set of three nesting ritual bowls hand-thrown from buff stoneware. Glossy interior for easy cleaning, tactile semi-matte exterior. Perfect for matcha or contemplative use.",
+              "sku": "6",
+              "brand": {
+                "@type": "Brand",
+                "name": "Shikha Kalsi Arts"
+              },
+              "image": [
+                "https://shikhakalsiarts.com/assets/bowl-set-1-main.jpg",
+                "https://shikhakalsiarts.com/assets/bowl-set-1-detail-1.jpg",
+                "https://shikhakalsiarts.com/assets/bowl-set-1-detail-2.jpg"
+              ],
+              "offers": {
+                "@type": "Offer",
+                "url": "https://shikhakalsiarts.com/shop/ritual-bowl-collection",
+                "priceCurrency": "USD",
+                "price": 340,
+                "availability": "https://schema.org/InStock",
+                "seller": {
+                  "@type": "Organization",
+                  "name": "Shikha Kalsi Arts"
+                }
+              },
+              "material": "Buff Stoneware",
+              "color": "Glossy interior / Semi-matte exterior",
+              "weight": {
+                "@type": "QuantitativeValue",
+                "value": 1.4,
+                "unitCode": "KGM"
+              },
+              "dimensions": {
+                "@type": "QuantitativeValue",
+                "height": "8 cm / 6.5 cm / 5 cm",
+                "width": "16 cm / 13 cm / 10 cm",
+                "depth": "16 cm / 13 cm / 10 cm"
+              },
+              "additionalProperty": [
+                {
+                  "@type": "PropertyValue",
+                  "name": "Firing Temperature",
+                  "value": "1240°C (Oxidation)"
+                },
+                {
+                  "@type": "PropertyValue",
+                  "name": "Category",
+                  "value": "Tableware"
+                },
+                {
+                  "@type": "PropertyValue",
+                  "name": "Finish",
+                  "value": "Glossy interior / Semi-matte exterior"
+                }
+              ],
+              "isVariantOf": {
+                "@type": "ProductModel",
+                "name": "Tableware Collection"
+              }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 7,
+            "item": {
+              "@context": "https://schema.org",
+              "@type": "Product",
+              "name": "Guardian Figure Sculpture",
+              "description": "Unique figurative guardian sculpture combining coiling and modeling. Saggar fired with organic materials creating unrepeatable surface patterns. True one-of-a-kind artwork.",
+              "sku": "7",
+              "brand": {
+                "@type": "Brand",
+                "name": "Shikha Kalsi Arts"
+              },
+              "image": [
+                "https://shikhakalsiarts.com/assets/sculpture-2-main.jpg",
+                "https://shikhakalsiarts.com/assets/sculpture-2-detail-1.jpg",
+                "https://shikhakalsiarts.com/assets/sculpture-2-detail-2.jpg"
+              ],
+              "offers": {
+                "@type": "Offer",
+                "url": "https://shikhakalsiarts.com/shop/guardian-sculpture",
+                "priceCurrency": "USD",
+                "price": 2800,
+                "availability": "https://schema.org/LimitedAvailability",
+                "seller": {
+                  "@type": "Organization",
+                  "name": "Shikha Kalsi Arts"
+                },
+                "eligibleQuantity": {
+                  "@type": "QuantitativeValue",
+                  "value": 1
+                }
+              },
+              "material": "Red Stoneware with Heavy Grog",
+              "color": "Saggar fired with organic materials",
+              "weight": {
+                "@type": "QuantitativeValue",
+                "value": 7.2,
+                "unitCode": "KGM"
+              },
+              "dimensions": {
+                "@type": "QuantitativeValue",
+                "height": "52 cm",
+                "width": "24 cm",
+                "depth": "20 cm"
+              },
+              "additionalProperty": [
+                {
+                  "@type": "PropertyValue",
+                  "name": "Firing Temperature",
+                  "value": "1100°C (Saggar) + 1200°C (Bisque)"
+                },
+                {
+                  "@type": "PropertyValue",
+                  "name": "Category",
+                  "value": "Sculptures"
+                },
+                {
+                  "@type": "PropertyValue",
+                  "name": "Finish",
+                  "value": "Saggar fired with organic materials"
+                },
+                {
+                  "@type": "PropertyValue",
+                  "name": "Edition",
+                  "value": "1 of 1"
+                }
+              ]
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 8,
+            "item": {
+              "@context": "https://schema.org",
+              "@type": "Product",
+              "name": "Water & Wine Pouring Set",
+              "description": "Elegant two-piece pouring set: water carafe and wine decanter. Precision-thrown for perfect balance and drip-free pouring. Ash glaze highlights thrown ring details.",
+              "sku": "8",
+              "brand": {
+                "@type": "Brand",
+                "name": "Shikha Kalsi Arts"
+              },
+              "image": [
+                "https://shikhakalsiarts.com/assets/pouring-set-1-main.jpg",
+                "https://shikhakalsiarts.com/assets/pouring-set-1-detail-1.jpg",
+                "https://shikhakalsiarts.com/assets/pouring-set-1-detail-2.jpg"
+              ],
+              "offers": {
+                "@type": "Offer",
+                "url": "https://shikhakalsiarts.com/shop/pouring-vessel-set",
+                "priceCurrency": "USD",
+                "price": 580,
+                "availability": "https://schema.org/InStock",
+                "seller": {
+                  "@type": "Organization",
+                  "name": "Shikha Kalsi Arts"
+                }
+              },
+              "material": "White Stoneware",
+              "color": "Subtle ash glaze on thrown rings",
+              "weight": {
+                "@type": "QuantitativeValue",
+                "value": 2.6,
+                "unitCode": "KGM"
+              },
+              "dimensions": {
+                "@type": "QuantitativeValue",
+                "height": "28 cm (carafe) / 32 cm (decanter)",
+                "width": "14 cm (carafe) / 18 cm (decanter)",
+                "depth": "14 cm (carafe) / 18 cm (decanter)"
+              },
+              "additionalProperty": [
+                {
+                  "@type": "PropertyValue",
+                  "name": "Firing Temperature",
+                  "value": "1280°C (Reduction)"
+                },
+                {
+                  "@type": "PropertyValue",
+                  "name": "Category",
+                  "value": "Tableware"
+                },
+                {
+                  "@type": "PropertyValue",
+                  "name": "Finish",
+                  "value": "Subtle ash glaze on thrown rings"
+                }
+              ],
+              "isVariantOf": {
+                "@type": "ProductModel",
+                "name": "Tableware Collection"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "ArtGallery",
+        "name": "Shikha Kalsi Arts",
+        "description": "Exclusive handmade clay studio creating sculptural ceramics, functional tableware, and limited edition art pieces. Each piece is handcrafted by artist Shikha Kalsi using traditional pottery techniques.",
+        "url": "https://shikhakalsiarts.com",
+        "logo": "https://shikhakalsiarts.com/assets/WhatsApp Image 2026-08-14 at 20.54.51.jpeg",
+        "image": "https://shikhakalsiarts.com/assets/WhatsApp Image 2026-08-14 at 20.54.51.jpeg",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Studio 12, Artisan Quarter",
+          "addressLocality": "Mumbai",
+          "addressRegion": "Maharashtra",
+          "postalCode": "400001",
+          "addressCountry": "IN"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "19.0760",
+          "longitude": "72.8777"
+        },
+        "telephone": "+91-22-XXXX-XXXX",
+        "email": "hello@shikhakalsiarts.com",
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "10:00",
+            "closes": "18:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Saturday",
+            "opens": "11:00",
+            "closes": "16:00"
+          }
+        ],
+        "priceRange": "$$$",
+        "currenciesAccepted": "USD INR",
+        "paymentAccepted": "Cash, Credit Card, Bank Transfer",
+        "sameAs": [
+          "https://instagram.com/shikhakalsiarts",
+          "https://facebook.com/shikhakalsiarts",
+          "https://pinterest.com/shikhakalsiarts"
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Shikha Kalsi Arts",
+        "description": "Luxury handmade clay studio specializing in sculptural ceramics, artisanal tableware, and limited edition collectible pieces.",
+        "url": "https://shikhakalsiarts.com",
+        "logo": "https://shikhakalsiarts.com/assets/WhatsApp Image 2026-08-14 at 20.54.51.jpeg",
+        "image": "https://shikhakalsiarts.com/assets/WhatsApp Image 2026-08-14 at 20.54.52.jpeg",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Studio 12, Artisan Quarter",
+          "addressLocality": "Mumbai",
+          "addressRegion": "Maharashtra",
+          "postalCode": "400001",
+          "addressCountry": "IN"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "19.0760",
+          "longitude": "72.8777"
+        },
+        "telephone": "+91-22-XXXX-XXXX",
+        "email": "hello@shikhakalsiarts.com",
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "10:00",
+            "closes": "18:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Saturday",
+            "opens": "11:00",
+            "closes": "16:00"
+          }
+        ],
+        "priceRange": "$$$",
+        "currenciesAccepted": "USD INR",
+        "paymentAccepted": "Cash, Credit Card, Bank Transfer",
+        "areaServed": "Worldwide",
+        "sameAs": [
+          "https://instagram.com/shikhakalsiarts",
+          "https://facebook.com/shikhakalsiarts",
+          "https://pinterest.com/shikhakalsiarts"
+        ]
+      }
+    ]
+  },
+  {
+    "url": "http://localhost:3000/shop",
+    "scripts": [
+      {
+        "@context": "https://schema.org",
+        "@type": "ArtGallery",
+        "name": "Shikha Kalsi Arts",
+        "description": "Exclusive handmade clay studio creating sculptural ceramics, functional tableware, and limited edition art pieces. Each piece is handcrafted by artist Shikha Kalsi using traditional pottery techniques.",
+        "url": "https://shikhakalsiarts.com",
+        "logo": "https://shikhakalsiarts.com/assets/WhatsApp Image 2026-08-14 at 20.54.51.jpeg",
+        "image": "https://shikhakalsiarts.com/assets/WhatsApp Image 2026-08-14 at 20.54.51.jpeg",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Studio 12, Artisan Quarter",
+          "addressLocality": "Mumbai",
+          "addressRegion": "Maharashtra",
+          "postalCode": "400001",
+          "addressCountry": "IN"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "19.0760",
+          "longitude": "72.8777"
+        },
+        "telephone": "+91-22-XXXX-XXXX",
+        "email": "hello@shikhakalsiarts.com",
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "10:00",
+            "closes": "18:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Saturday",
+            "opens": "11:00",
+            "closes": "16:00"
+          }
+        ],
+        "priceRange": "$$$",
+        "currenciesAccepted": "USD INR",
+        "paymentAccepted": "Cash, Credit Card, Bank Transfer",
+        "sameAs": [
+          "https://instagram.com/shikhakalsiarts",
+          "https://facebook.com/shikhakalsiarts",
+          "https://pinterest.com/shikhakalsiarts"
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Shikha Kalsi Arts",
+        "description": "Luxury handmade clay studio specializing in sculptural ceramics, artisanal tableware, and limited edition collectible pieces.",
+        "url": "https://shikhakalsiarts.com",
+        "logo": "https://shikhakalsiarts.com/assets/WhatsApp Image 2026-08-14 at 20.54.51.jpeg",
+        "image": "https://shikhakalsiarts.com/assets/WhatsApp Image 2026-08-14 at 20.54.52.jpeg",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Studio 12, Artisan Quarter",
+          "addressLocality": "Mumbai",
+          "addressRegion": "Maharashtra",
+          "postalCode": "400001",
+          "addressCountry": "IN"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "19.0760",
+          "longitude": "72.8777"
+        },
+        "telephone": "+91-22-XXXX-XXXX",
+        "email": "hello@shikhakalsiarts.com",
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "10:00",
+            "closes": "18:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Saturday",
+            "opens": "11:00",
+            "closes": "16:00"
+          }
+        ],
+        "priceRange": "$$$",
+        "currenciesAccepted": "USD INR",
+        "paymentAccepted": "Cash, Credit Card, Bank Transfer",
+        "areaServed": "Worldwide",
+        "sameAs": [
+          "https://instagram.com/shikhakalsiarts",
+          "https://facebook.com/shikhakalsiarts",
+          "https://pinterest.com/shikhakalsiarts"
+        ]
+      }
+    ]
+  },
+  {
+    "url": "http://localhost:3000/gallery",
+    "scripts": [
+      {
+        "@context": "https://schema.org",
+        "@type": "ArtGallery",
+        "name": "Shikha Kalsi Arts",
+        "description": "Exclusive handmade clay studio creating sculptural ceramics, functional tableware, and limited edition art pieces. Each piece is handcrafted by artist Shikha Kalsi using traditional pottery techniques.",
+        "url": "https://shikhakalsiarts.com",
+        "logo": "https://shikhakalsiarts.com/assets/WhatsApp Image 2026-08-14 at 20.54.51.jpeg",
+        "image": "https://shikhakalsiarts.com/assets/WhatsApp Image 2026-08-14 at 20.54.51.jpeg",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Studio 12, Artisan Quarter",
+          "addressLocality": "Mumbai",
+          "addressRegion": "Maharashtra",
+          "postalCode": "400001",
+          "addressCountry": "IN"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "19.0760",
+          "longitude": "72.8777"
+        },
+        "telephone": "+91-22-XXXX-XXXX",
+        "email": "hello@shikhakalsiarts.com",
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "10:00",
+            "closes": "18:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Saturday",
+            "opens": "11:00",
+            "closes": "16:00"
+          }
+        ],
+        "priceRange": "$$$",
+        "currenciesAccepted": "USD INR",
+        "paymentAccepted": "Cash, Credit Card, Bank Transfer",
+        "sameAs": [
+          "https://instagram.com/shikhakalsiarts",
+          "https://facebook.com/shikhakalsiarts",
+          "https://pinterest.com/shikhakalsiarts"
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Shikha Kalsi Arts",
+        "description": "Luxury handmade clay studio specializing in sculptural ceramics, artisanal tableware, and limited edition collectible pieces.",
+        "url": "https://shikhakalsiarts.com",
+        "logo": "https://shikhakalsiarts.com/assets/WhatsApp Image 2026-08-14 at 20.54.51.jpeg",
+        "image": "https://shikhakalsiarts.com/assets/WhatsApp Image 2026-08-14 at 20.54.52.jpeg",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Studio 12, Artisan Quarter",
+          "addressLocality": "Mumbai",
+          "addressRegion": "Maharashtra",
+          "postalCode": "400001",
+          "addressCountry": "IN"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "19.0760",
+          "longitude": "72.8777"
+        },
+        "telephone": "+91-22-XXXX-XXXX",
+        "email": "hello@shikhakalsiarts.com",
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "10:00",
+            "closes": "18:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Saturday",
+            "opens": "11:00",
+            "closes": "16:00"
+          }
+        ],
+        "priceRange": "$$$",
+        "currenciesAccepted": "USD INR",
+        "paymentAccepted": "Cash, Credit Card, Bank Transfer",
+        "areaServed": "Worldwide",
+        "sameAs": [
+          "https://instagram.com/shikhakalsiarts",
+          "https://facebook.com/shikhakalsiarts",
+          "https://pinterest.com/shikhakalsiarts"
+        ]
+      }
+    ]
+  },
+  {
+    "url": "http://localhost:3000/process",
+    "scripts": [
+      {
+        "@context": "https://schema.org",
+        "@type": "ArtGallery",
+        "name": "Shikha Kalsi Arts",
+        "description": "Exclusive handmade clay studio creating sculptural ceramics, functional tableware, and limited edition art pieces. Each piece is handcrafted by artist Shikha Kalsi using traditional pottery techniques.",
+        "url": "https://shikhakalsiarts.com",
+        "logo": "https://shikhakalsiarts.com/assets/WhatsApp Image 2026-08-14 at 20.54.51.jpeg",
+        "image": "https://shikhakalsiarts.com/assets/WhatsApp Image 2026-08-14 at 20.54.51.jpeg",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Studio 12, Artisan Quarter",
+          "addressLocality": "Mumbai",
+          "addressRegion": "Maharashtra",
+          "postalCode": "400001",
+          "addressCountry": "IN"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "19.0760",
+          "longitude": "72.8777"
+        },
+        "telephone": "+91-22-XXXX-XXXX",
+        "email": "hello@shikhakalsiarts.com",
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "10:00",
+            "closes": "18:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Saturday",
+            "opens": "11:00",
+            "closes": "16:00"
+          }
+        ],
+        "priceRange": "$$$",
+        "currenciesAccepted": "USD INR",
+        "paymentAccepted": "Cash, Credit Card, Bank Transfer",
+        "sameAs": [
+          "https://instagram.com/shikhakalsiarts",
+          "https://facebook.com/shikhakalsiarts",
+          "https://pinterest.com/shikhakalsiarts"
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Shikha Kalsi Arts",
+        "description": "Luxury handmade clay studio specializing in sculptural ceramics, artisanal tableware, and limited edition collectible pieces.",
+        "url": "https://shikhakalsiarts.com",
+        "logo": "https://shikhakalsiarts.com/assets/WhatsApp Image 2026-08-14 at 20.54.51.jpeg",
+        "image": "https://shikhakalsiarts.com/assets/WhatsApp Image 2026-08-14 at 20.54.52.jpeg",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Studio 12, Artisan Quarter",
+          "addressLocality": "Mumbai",
+          "addressRegion": "Maharashtra",
+          "postalCode": "400001",
+          "addressCountry": "IN"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "19.0760",
+          "longitude": "72.8777"
+        },
+        "telephone": "+91-22-XXXX-XXXX",
+        "email": "hello@shikhakalsiarts.com",
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "10:00",
+            "closes": "18:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Saturday",
+            "opens": "11:00",
+            "closes": "16:00"
+          }
+        ],
+        "priceRange": "$$$",
+        "currenciesAccepted": "USD INR",
+        "paymentAccepted": "Cash, Credit Card, Bank Transfer",
+        "areaServed": "Worldwide",
+        "sameAs": [
+          "https://instagram.com/shikhakalsiarts",
+          "https://facebook.com/shikhakalsiarts",
+          "https://pinterest.com/shikhakalsiarts"
+        ]
+      }
+    ]
+  }
+]

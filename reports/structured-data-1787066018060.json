@@ -1,0 +1,18 @@
+[
+  {
+    "url": "http://localhost:3000/",
+    "scripts": []
+  },
+  {
+    "url": "http://localhost:3000/shop",
+    "scripts": []
+  },
+  {
+    "url": "http://localhost:3000/gallery",
+    "scripts": []
+  },
+  {
+    "url": "http://localhost:3000/process",
+    "scripts": []
+  }
+]
