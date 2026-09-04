@@ -6,6 +6,12 @@
   :root {
     /* App header spacing: adjust if your header height changes */
     --header-height: 80px;
+
+    /* Motion tokens — mirrored in src/lib/motion.ts for JS-driven animation. */
+    --ease-expo-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-snappy: cubic-bezier(0.65, 0, 0.35, 1);
+    --motion-micro: 180ms;
+    --motion-reveal: 600ms;
   }
 
   /*
@@ -35,6 +41,7 @@
     *::before,
     *::after {
       animation-duration: 0.01ms !important;
+      animation-delay: 0ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
     }
@@ -55,31 +62,65 @@
     text-wrap: balance;
   }
 
+  /*
+   * Micro-interactions run at 180ms on a snappy ease-in-out curve, and
+   * transition only transform/colour/box-shadow — never `all`, which would
+   * sweep in layout-affecting properties too.
+   */
   .hover-lift {
-    @apply transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-2xl;
+    transition-property: transform, box-shadow;
+    transition-duration: var(--motion-micro);
+    transition-timing-function: var(--ease-snappy);
+    @apply hover:-translate-y-0.5 hover:shadow-2xl;
   }
 
   .btn-primary {
-      @apply px-8 py-4 bg-gold text-obsidian font-medium rounded-full
-        transition-all duration-300 ease-out
-        hover:bg-gold-soft hover:scale-105
-        active:scale-95
-        focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-obsidian;
+    transition-property: transform, background-color, box-shadow;
+    transition-duration: var(--motion-micro);
+    transition-timing-function: var(--ease-snappy);
+    @apply px-8 py-4 bg-gold text-obsidian font-semibold rounded-full
+      hover:bg-gold-soft hover:scale-[1.03]
+      hover:shadow-[0_10px_30px_-10px_rgba(201,162,75,0.55)]
+      active:scale-[0.97]
+      focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-obsidian;
   }
 
   .btn-secondary {
-      @apply px-8 py-4 border-2 border-gold text-ivory font-medium rounded-full
-        transition-all duration-300 ease-out
-        hover:bg-charcoal hover:text-ivory
-        active:scale-95
-        focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-obsidian;
+    transition-property: transform, background-color, border-color, color;
+    transition-duration: var(--motion-micro);
+    transition-timing-function: var(--ease-snappy);
+    @apply px-8 py-4 border border-gold/70 text-ivory font-medium rounded-full
+      hover:bg-gold/10 hover:border-gold hover:scale-[1.02]
+      active:scale-[0.97]
+      focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-obsidian;
   }
 
   .input-field {
-      @apply w-full px-6 py-4 bg-charcoal border border-line rounded-full
-        text-ivory placeholder:text-ivory-dim
-        focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20
-        transition-all duration-300;
+    transition-property: border-color, box-shadow;
+    transition-duration: var(--motion-micro);
+    transition-timing-function: var(--ease-snappy);
+    @apply w-full px-6 py-4 bg-charcoal border border-line rounded-full
+      text-ivory placeholder:text-ivory-dim
+      focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20;
+  }
+
+  /* Shimmer skeleton for loading states. */
+  .skeleton {
+    @apply relative overflow-hidden bg-charcoal/60;
+  }
+
+  .skeleton::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background-image: linear-gradient(
+      90deg,
+      transparent,
+      rgba(243, 236, 221, 0.06),
+      transparent
+    );
+    animation: shimmer 1.4s var(--ease-expo-out) infinite;
   }
 
   .section-container {
@@ -87,7 +128,47 @@
   }
 }
 
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/*
+ * Hero entrance runs in CSS, not JS, on purpose.
+ *
+ * The <h1> is this page's LCP element. Animating it from opacity:0 with a
+ * JS library meant it stayed invisible until React hydrated, which pushed LCP
+ * out by ~2.2s under throttled CPU. A CSS animation starts on the first paint
+ * instead, so the headline is painted immediately and LCP is unaffected.
+ */
+@keyframes hero-enter {
+  from {
+    opacity: 0;
+    transform: translateY(var(--enter-from, 24px));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@layer components {
+  .hero-enter {
+    animation: hero-enter 700ms var(--ease-expo-out) both;
+    animation-delay: var(--enter-delay, 0ms);
+  }
+}
+
 @layer utilities {
+  /*
+   * Apply only to elements that are actively animating. Leaving will-change on
+   * idle elements keeps layers alive on the GPU for no benefit.
+   */
+  .will-animate {
+    will-change: transform, opacity;
+  }
+
   .perspective-1000 {
     perspective: 1000px;
   }

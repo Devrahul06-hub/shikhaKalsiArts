@@ -80,6 +80,52 @@ Plus Jakarta Sans now actually render.
 
 ---
 
+## Motion system
+
+One library: **Framer Motion** for JS-driven animation, **Lenis** for scroll. No GSAP, no
+`tailwindcss-animate` — mixing them would mean two competing animation runtimes.
+
+Tokens live in `src/lib/motion.ts` and are mirrored as CSS custom properties in `globals.css`
+(`--ease-expo-out`, `--ease-snappy`, `--motion-micro`). Change timing there, not per component.
+
+- Easing: `cubic-bezier(0.16, 1, 0.3, 1)` (expo-out) for reveals, `cubic-bezier(0.65, 0, 0.35, 1)`
+  for micro-interactions.
+- Durations: 180ms micro-interactions, 600ms section reveals, 700ms hero entrance.
+- Stagger: 45–80ms between siblings.
+- Only `transform` and `opacity` are animated anywhere. `will-change` is applied to exactly two
+  elements (the hero parallax wrapper and the scroll progress bar) — the only two that animate
+  continuously.
+
+### Why the hero entrance is CSS, not Framer Motion
+
+The `<h1>` is this page's LCP element. Animating it from `opacity: 0` in JS meant it stayed
+invisible until React hydrated, which measured as **2.26s of LCP "render delay"** under
+Lighthouse's throttled CPU. Moving the hero entrance to a CSS keyframe (`.hero-enter` with a
+per-element `--enter-delay`) means it starts on the first paint instead. **LCP 2.7s → 1.7s,
+Performance 96 → 100.**
+
+The rule that follows from this: anything above the fold animates in CSS; anything
+scroll-triggered (which by definition happens after hydration) uses Framer Motion.
+
+### Not implemented, and why
+
+- **Route/page transitions** — this is a single page. Only `/` exists, so there is nothing to
+  transition between. If routes are added later, a `template.tsx` cross-fade is the hook.
+- **Number/stat counters** — there are no stats on the site. Adding "500+ pieces delivered"
+  style figures would mean inventing credentials, which is the same problem that was cleaned up
+  elsewhere on this site. Supply real figures and this becomes a ~20-line component.
+
+### Verified
+
+Production build, Lighthouse (mobile emulation, 4× CPU throttle):
+Performance **100**, Accessibility **100**, Best Practices 96.
+CLS **0**, Total Blocking Time **0ms**, "Avoid non-composited animations" reports nothing.
+axe-core: **0 WCAG 2.1 AA violations**. No horizontal overflow at 390px or 1440px.
+Under `prefers-reduced-motion`, all animated content resolves to `opacity: 1` — nothing is
+left stuck invisible, which is the usual failure mode of `whileInView` reveals.
+
+---
+
 ## Open question — positioning vs. portfolio
 
 The site copy describes a studio doing **"large-scale fiber composite sculptures and

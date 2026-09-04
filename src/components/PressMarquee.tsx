@@ -1,6 +1,7 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { Reveal, RevealItem } from '@/components/motion/Reveal'
+import { stagger } from '@/lib/motion'
 import { WhatsAppIcon } from '@/components/icons/WhatsAppIcon'
 import {
   InstagramIcon,
@@ -38,13 +39,7 @@ export function PressMarquee() {
       aria-labelledby="studio-heading"
     >
       <div className="section-container">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.7 }}
-          className="max-w-2xl"
-        >
+        <Reveal className="max-w-2xl">
           <p className="text-[0.65rem] uppercase tracking-[0.35em] text-gold mb-5">
             The studio
           </p>
@@ -60,17 +55,17 @@ export function PressMarquee() {
             of commissions so each piece gets the time it needs — from the first
             reference image through modelling, finishing, and final painting.
           </p>
-        </motion.div>
+        </Reveal>
 
-        <div className="mt-14 grid gap-6 sm:grid-cols-3">
+        <Reveal
+          stagger={stagger.loose}
+          delay={0.05}
+          className="mt-14 grid gap-6 sm:grid-cols-3"
+        >
           {commissionTypes.map((item, index) => (
-            <motion.div
+            <RevealItem
               key={item.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.5, delay: index * 0.08 }}
-              className="rounded-2xl border border-line/40 bg-charcoal/40 p-7"
+              className="rounded-2xl border border-line/40 bg-charcoal/40 p-7 transition-[border-color,transform] duration-[180ms] ease-[cubic-bezier(0.65,0,0.35,1)] hover:border-gold/40 hover:-translate-y-1"
             >
               <span className="text-xs font-medium tracking-[0.2em] text-gold/70">
                 0{index + 1}
@@ -79,11 +74,11 @@ export function PressMarquee() {
               <p className="mt-3 text-sm text-ivory/60 leading-relaxed">
                 {item.body}
               </p>
-            </motion.div>
+            </RevealItem>
           ))}
-        </div>
+        </Reveal>
 
-        <div className="mt-14 flex flex-col sm:flex-row items-center justify-between gap-6 rounded-2xl border border-line/40 bg-charcoal/30 px-7 py-6">
+        <Reveal className="mt-14 flex flex-col sm:flex-row items-center justify-between gap-6 rounded-2xl border border-line/40 bg-charcoal/30 px-7 py-6">
           <div className="flex flex-wrap items-center justify-center gap-4">
             <span className="text-sm text-ivory/60">Follow the studio</span>
             <div className="flex items-center gap-2.5">
@@ -111,7 +106,7 @@ export function PressMarquee() {
             <WhatsAppIcon className="w-4 h-4" />
             Message the studio
           </a>
-        </div>
+        </Reveal>
       </div>
     </section>
   )

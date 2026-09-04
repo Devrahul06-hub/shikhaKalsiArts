@@ -1,28 +1,64 @@
-"use client"
+'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 import { MotionConfig } from 'framer-motion'
+import { duration, expoOut } from '@/lib/motion'
+
+type MotionEnv = {
+  /** User has asked for reduced motion. */
+  reduced: boolean
+  /** Viewport is small — decorative motion (parallax) is skipped. */
+  compact: boolean
+}
+
+const MotionEnvContext = createContext<MotionEnv>({
+  reduced: false,
+  compact: false,
+})
+
+/**
+ * Read the current motion environment. Components use this to skip decorative
+ * effects rather than re-querying matchMedia themselves.
+ */
+export function useMotionEnv() {
+  return useContext(MotionEnvContext)
+}
 
 export function MotionProvider({ children }: { children: React.ReactNode }) {
-  const [reduced, setReduced] = useState(false)
+  const [env, setEnv] = useState<MotionEnv>({ reduced: false, compact: false })
 
   useEffect(() => {
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
-    setReduced(mq.matches)
-    const handler = (e: MediaQueryListEvent) => setReduced(e.matches)
-    if (mq.addEventListener) mq.addEventListener('change', handler)
-    else mq.addListener(handler)
+    const reducedQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const compactQuery = window.matchMedia('(max-width: 768px)')
+
+    const sync = () =>
+      setEnv({ reduced: reducedQuery.matches, compact: compactQuery.matches })
+
+    sync()
+    reducedQuery.addEventListener('change', sync)
+    compactQuery.addEventListener('change', sync)
+
     return () => {
-      if (mq.removeEventListener) mq.removeEventListener('change', handler)
-      else mq.removeListener(handler)
+      reducedQuery.removeEventListener('change', sync)
+      compactQuery.removeEventListener('change', sync)
     }
   }, [])
 
-  const transition = reduced
-    ? { duration: 0 }
-    : { duration: 0.45, ease: [0.2, 0.8, 0.2, 1] }
-
-  return <MotionConfig transition={transition}>{children}</MotionConfig>
+  return (
+    <MotionEnvContext.Provider value={env}>
+      <MotionConfig
+        reducedMotion={env.reduced ? 'always' : 'never'}
+        transition={{
+          // Mobile gets shorter durations: less time waiting on a device that
+          // is usually being scrolled faster.
+          duration: env.compact ? duration.reveal * 0.7 : duration.reveal,
+          ease: expoOut,
+        }}
+      >
+        {children}
+      </MotionConfig>
+    </MotionEnvContext.Provider>
+  )
 }
 
 export default MotionProvider

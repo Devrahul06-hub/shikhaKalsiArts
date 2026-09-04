@@ -1,7 +1,8 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import { ArrowUp } from 'lucide-react'
+import { Reveal, RevealItem } from '@/components/motion/Reveal'
+import { stagger } from '@/lib/motion'
 import { WhatsAppIcon } from '@/components/icons/WhatsAppIcon'
 import {
   InstagramIcon,
@@ -39,48 +40,51 @@ export function Footer() {
       aria-labelledby="footer-heading"
     >
       <div className="section-container relative">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.7, ease: 'easeOut' }}
-          className="max-w-3xl"
-        >
-          <p className="text-[0.65rem] uppercase tracking-[0.35em] text-gold mb-6">
-            Start a conversation
-          </p>
-          <h2
-            id="footer-heading"
-            className="font-display text-3xl sm:text-4xl lg:text-5xl font-medium leading-tight text-balance"
-          >
-            Have a space, a brief, or an idea?
-            <br />
-            <span className="text-gold">Let&apos;s talk it through.</span>
-          </h2>
-          <p className="mt-6 text-ivory/60 leading-relaxed max-w-xl">
-            The studio takes on a limited number of commissions each year. Send a
-            message on WhatsApp with your site, scale, and timeline — Shikha replies
-            personally.
-          </p>
+        <Reveal stagger={stagger.normal} className="max-w-3xl">
+          <RevealItem distance={16}>
+            <p className="text-[0.65rem] uppercase tracking-[0.35em] text-gold mb-6">
+              Start a conversation
+            </p>
+          </RevealItem>
+          <RevealItem distance={28}>
+            <h2
+              id="footer-heading"
+              className="font-display text-3xl sm:text-4xl lg:text-5xl font-medium leading-tight text-balance"
+            >
+              Have a space, a brief, or an idea?
+              <br />
+              <span className="text-gold">Let&apos;s talk it through.</span>
+            </h2>
+          </RevealItem>
+          <RevealItem>
+            <p className="mt-6 text-ivory/60 leading-relaxed max-w-xl">
+              The studio takes on a limited number of commissions each year. Send a
+              message on WhatsApp with your site, scale, and timeline — Shikha replies
+              personally.
+            </p>
+          </RevealItem>
 
-          <div className="mt-9 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+          <RevealItem
+            distance={20}
+            className="mt-9 flex flex-col sm:flex-row items-stretch sm:items-center gap-4"
+          >
             <a
               href={whatsappUrl()}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-gold text-obsidian font-semibold transition-all duration-300 hover:bg-gold-soft hover:scale-[1.02] active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal"
+              className="btn-primary inline-flex items-center justify-center gap-2.5 focus-visible:ring-offset-charcoal"
             >
               <WhatsAppIcon className="w-5 h-5" />
               Enquire on WhatsApp
             </a>
             <a
               href={`tel:+${WHATSAPP_DISPLAY.replace(/[^\d]/g, '')}`}
-              className="inline-flex items-center justify-center px-8 py-4 rounded-full border border-line text-ivory/80 font-medium transition-colors hover:border-gold hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              className="btn-secondary text-center focus-visible:ring-offset-charcoal"
             >
               {WHATSAPP_DISPLAY}
             </a>
-          </div>
-        </motion.div>
+          </RevealItem>
+        </Reveal>
 
         <div className="mt-16 lg:mt-20 grid gap-12 lg:grid-cols-[1.5fr_1fr_1fr] border-t border-line/40 pt-12">
           <div>

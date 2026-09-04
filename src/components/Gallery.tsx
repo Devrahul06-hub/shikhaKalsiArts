@@ -5,7 +5,9 @@ import Image from 'next/image'
 import { AnimatePresence, motion } from 'framer-motion'
 import { X, ChevronLeft, ChevronRight, Plus } from 'lucide-react'
 import { WhatsAppIcon } from '@/components/icons/WhatsAppIcon'
+import { Reveal } from '@/components/motion/Reveal'
 import { whatsappUrl } from '@/lib/contact'
+import { inView, stagger, transitions } from '@/lib/motion'
 import {
   getWorksByCategory,
   workCategories,
@@ -62,7 +64,7 @@ export function Gallery() {
       aria-labelledby="gallery-heading"
     >
       <div className="section-container">
-        <div className="max-w-2xl">
+        <Reveal className="max-w-2xl">
           <p className="text-[0.65rem] uppercase tracking-[0.35em] text-gold mb-5">
             Selected work
           </p>
@@ -78,10 +80,12 @@ export function Gallery() {
             painted by hand. Commissions begin from a conversation, a reference, or a
             space.
           </p>
-        </div>
+        </Reveal>
 
-        <div
+        <Reveal
           className="mt-12 flex flex-wrap gap-2"
+          distance={16}
+          delay={0.05}
           role="group"
           aria-label="Filter work by category"
         >
@@ -105,7 +109,7 @@ export function Gallery() {
               </button>
             )
           })}
-        </div>
+        </Reveal>
 
         <motion.div
           layout
@@ -116,10 +120,16 @@ export function Gallery() {
               <motion.article
                 key={work.id}
                 layout
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.97 }}
-                transition={{ duration: 0.35, ease: 'easeOut' }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={inView}
+                exit={{ opacity: 0, scale: 0.97, transition: transitions.micro }}
+                // Cards cascade rather than popping in together. The index is
+                // capped so a long grid never has a visibly late last card.
+                transition={{
+                  ...transitions.reveal,
+                  delay: Math.min(index, 5) * stagger.tight,
+                }}
                 className="group"
               >
                 <button
@@ -132,8 +142,8 @@ export function Gallery() {
                       src={work.image}
                       alt={work.alt}
                       fill
-                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-                      sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 31vw"
+                      className="object-cover transition-transform duration-[450ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]"
+                      sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 400px"
                     />
                     {/* Several pieces are photographed on pale backgrounds, so the
                         caption needs a deep scrim to stay readable over them. */}
@@ -167,7 +177,7 @@ export function Gallery() {
           </AnimatePresence>
         </motion.div>
 
-        <div className="mt-14 flex flex-col sm:flex-row items-center gap-5 rounded-2xl border border-line/50 bg-charcoal/40 px-7 py-6">
+        <Reveal className="mt-14 flex flex-col sm:flex-row items-center gap-5 rounded-2xl border border-line/50 bg-charcoal/40 px-7 py-6">
           <p className="text-ivory/70 text-center sm:text-left flex-1">
             Looking for something specific — a deity, a portrait, a piece for a
             particular corner? Send a photo or a reference and Shikha will take it
@@ -184,7 +194,7 @@ export function Gallery() {
             <WhatsAppIcon className="w-5 h-5" />
             Discuss a commission
           </a>
-        </div>
+        </Reveal>
       </div>
 
       <AnimatePresence>

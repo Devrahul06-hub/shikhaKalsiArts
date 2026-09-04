@@ -3,6 +3,8 @@
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { MessagesSquare, PencilRuler, Hammer, Package } from 'lucide-react'
+import { Reveal } from '@/components/motion/Reveal'
+import { expoOut, inView, stagger, staggerChild } from '@/lib/motion'
 
 const stages = [
   {
@@ -63,13 +65,7 @@ export function ProcessTimeline() {
       aria-labelledby="process-heading"
     >
       <div className="section-container">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.7 }}
-          className="max-w-2xl"
-        >
+        <Reveal className="max-w-2xl">
           <p className="text-[0.65rem] uppercase tracking-[0.35em] text-gold mb-5">
             How a commission works
           </p>
@@ -84,20 +80,33 @@ export function ProcessTimeline() {
             Four stages, with your approval at each one. Most commissions take four to
             eight weeks depending on size and finish.
           </p>
-        </motion.div>
+        </Reveal>
 
         <ol className="mt-16 space-y-6" role="list">
-          {stages.map((stage, index) => (
+          {stages.map((stage) => (
             <motion.li
               key={stage.id}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.55, delay: index * 0.06 }}
-              className="group relative overflow-hidden rounded-2xl border border-line/40 bg-charcoal/40 transition-colors duration-300 hover:border-gold/40"
+              initial="hidden"
+              whileInView="visible"
+              viewport={inView}
+              variants={{
+                hidden: { opacity: 0, y: 24 },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: {
+                    duration: 0.6,
+                    ease: expoOut,
+                    staggerChildren: stagger.normal,
+                    delayChildren: 0.08,
+                  },
+                },
+              }}
+              className="group relative overflow-hidden rounded-2xl border border-line/40 bg-charcoal/40 transition-[border-color,transform] duration-[180ms] ease-[cubic-bezier(0.65,0,0.35,1)] hover:border-gold/40 hover:-translate-y-0.5"
             >
               <div className="grid md:grid-cols-[1.35fr_1fr] gap-0">
-                <div className="p-7 lg:p-9">
+                {/* Text sits left, image right — each enters from its own side. */}
+                <motion.div variants={staggerChild(20, 'x')} className="p-7 lg:p-9">
                   <div className="flex items-center gap-4">
                     <span className="inline-flex items-center justify-center w-11 h-11 rounded-full bg-gold/10 border border-gold/25 text-gold">
                       <stage.icon className="w-5 h-5" aria-hidden="true" />
@@ -127,9 +136,12 @@ export function ProcessTimeline() {
                       </li>
                     ))}
                   </ul>
-                </div>
+                </motion.div>
 
-                <div className="relative min-h-[15rem] md:min-h-full order-first md:order-last">
+                <motion.div
+                  variants={staggerChild(-20, 'x')}
+                  className="relative min-h-[15rem] md:min-h-full order-first md:order-last"
+                >
                   <Image
                     src={stage.image}
                     alt={stage.alt}
@@ -141,7 +153,7 @@ export function ProcessTimeline() {
                     className="absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal/20 to-transparent md:from-charcoal md:via-charcoal/40"
                     aria-hidden="true"
                   />
-                </div>
+                </motion.div>
               </div>
             </motion.li>
           ))}

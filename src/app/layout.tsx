@@ -6,6 +6,7 @@ import { Footer } from '@/components/Footer'
 import { JsonLd } from '@/components/JsonLd'
 import { LenisProvider } from '@/components/LenisProvider'
 import MotionProvider from '@/components/MotionProvider'
+import { ScrollProgress } from '@/components/motion/ScrollProgress'
 
 export const metadata: Metadata = {
   title: {
@@ -100,6 +101,7 @@ export default function RootLayout({
             Skip to main content
           </a>
           
+          <ScrollProgress />
           <Navbar />
 
           {/* The hero supplies the page's single <h1>. */}
