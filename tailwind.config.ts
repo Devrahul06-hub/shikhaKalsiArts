@@ -9,15 +9,19 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        cream: '#F9F6F0',
-        clay: '#2A2421',
-        terracotta: '#C05A3E',
-        ochre: '#D49B4B',
-        sage: '#8A9A86',
+        obsidian: '#0B0B0A',
+        charcoal: '#211F1C',
+        ivory: '#F3ECDD',
+        'ivory-dim': '#E8DFC9',
+        gold: '#C9A24B',
+        'gold-soft': '#DEC386',
+        bronze: '#8B6F3E',
+        stone: '#9A9384',
+        line: 'rgba(201,162,75,0.25)'
       },
       fontFamily: {
         display: ['var(--font-display)'],
-        body: ['var(--font-body)'],
+        sans: ['var(--font-body)'],
       },
       animation: {
         'marquee': 'marquee 30s linear infinite',

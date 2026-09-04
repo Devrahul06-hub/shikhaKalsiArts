@@ -9,21 +9,17 @@ import MotionProvider from '@/components/MotionProvider'
 
 export const metadata: Metadata = {
   title: {
-    default: 'Shikha Kalsi Arts | Handcrafted Clay Studio | Sculptural Ceramics & Tableware',
+    default: 'Shikha Kalsi Arts | Sculpture & Architectural Studio',
     template: '%s | Shikha Kalsi Arts',
   },
-  description: 'Exclusive handmade clay studio creating sculptural ceramics, artisanal tableware, and limited edition collectible pieces. Each work embodies the wabi-sabi philosophy — finding beauty in imperfection. Handcrafted in Mumbai.',
+  description: 'Studio producing large-scale fiber composite sculptures and architectural installations for commissions, public art, and brand mascots.',
   keywords: [
-    'handmade ceramics',
-    'sculptural pottery',
-    'artisanal tableware',
-    'limited edition ceramics',
-    'clay art',
-    'wood fired pottery',
-    'ceramic art collectibles',
-    'bespoke ceramic commissions',
+    'sculpture',
+    'architectural sculpture',
+    'public art',
+    'commissioned sculpture',
+    'fiber composite sculpture',
     'Shikha Kalsi',
-    'Mumbai ceramic studio',
   ],
   authors: [{ name: 'Shikha Kalsi Arts' }],
   creator: 'Shikha Kalsi Arts',
@@ -39,21 +35,21 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://shikhakalsiarts.com',
     siteName: 'Shikha Kalsi Arts',
-    title: 'Shikha Kalsi Arts | Handcrafted Clay Studio',
-    description: 'Exclusive handmade clay studio creating sculptural ceramics, artisanal tableware, and limited edition collectible pieces.',
+    title: 'Shikha Kalsi Arts | Sculpture & Architectural Studio',
+    description: 'Studio producing large-scale sculptures and architectural installations for commissions and public art.',
     images: [
       {
         url: '/assets/WhatsApp Image 2026-08-14 at 20.54.51.jpeg',
         width: 1200,
         height: 630,
-        alt: 'Shikha Kalsi Arts - Handcrafted Clay Studio Gallery',
+        alt: 'Shikha Kalsi Arts - Sculpture & Architectural Studio',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Shikha Kalsi Arts | Handcrafted Clay Studio',
-    description: 'Exclusive handmade clay studio creating sculptural ceramics, artisanal tableware, and limited edition collectible pieces.',
+    title: 'Shikha Kalsi Arts | Sculpture & Architectural Studio',
+    description: 'Studio producing large-scale fiber composite sculptures and architectural installations for commissions, public art, and brand mascots.',
     images: ['/assets/WhatsApp Image 2026-08-14 at 20.54.51.jpeg'],
     creator: '@shikhakalsiarts',
   },
@@ -68,9 +64,7 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  verification: {
-    google: 'google-site-verification-code',
-  },
+  // Add `verification: { google: '<real code>' }` once Search Console issues one.
 }
 
 export const viewport: Viewport = {
@@ -96,7 +90,7 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
       </head>
-      <body className="bg-cream text-clay antialiased">
+      <body className="bg-obsidian text-ivory antialiased">
         <LenisProvider>
           <MotionProvider>
           <a
@@ -108,8 +102,8 @@ export default function RootLayout({
           
           <Navbar />
 
+          {/* The hero supplies the page's single <h1>. */}
           <main id="main-content" role="main" className="min-h-screen">
-            <h1 className="sr-only">Shikha Kalsi Arts — Handcrafted Clay Studio</h1>
             {children}
           </main>
           

@@ -4,33 +4,51 @@
 
 @layer base {
   :root {
-    --font-display: 'Playfair Display', serif;
-    --font-body: 'Plus Jakarta Sans', sans-serif;
     /* App header spacing: adjust if your header height changes */
-    --header-height: 96px;
+    --header-height: 80px;
   }
 
-  html {
-    scroll-behavior: smooth;
-  }
-
+  /*
+   * No `scroll-behavior: smooth` here on purpose: Lenis drives scrolling and
+   * routes anchor clicks itself. Running both engines makes them fight and
+   * produces the stutter this used to have.
+   */
   body {
-    @apply bg-cream text-clay font-body antialiased;
+    font-family: var(--font-body);
+    @apply bg-obsidian text-ivory antialiased;
   }
 
-  /* Ensure main content sits below the fixed header */
-  main#main-content {
-    padding-top: calc(var(--header-height) + 1rem);
+  /*
+   * The hero runs full-bleed underneath the transparent header, so no global
+   * top padding. Anchored sections just reserve header height when jumped to.
+   */
+  section[id] {
+    scroll-margin-top: var(--header-height);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 
   ::selection {
-    @apply bg-terracotta/30 text-clay;
+    background: rgba(201,162,75,0.2);
+    color: var(--tw-text-opacity, 1);
   }
 }
 
 @layer components {
   .glassmorphism {
-    @apply backdrop-blur-md bg-white/50 border border-white/20 shadow-xl;
+    @apply backdrop-blur-md bg-charcoal/80 border border-line shadow-xl;
   }
 
   .text-balance {
@@ -42,26 +60,26 @@
   }
 
   .btn-primary {
-    @apply px-8 py-4 bg-clay text-cream font-medium rounded-full
-           transition-all duration-300 ease-out
-           hover:bg-terracotta hover:scale-105
-           active:scale-95
-           focus:outline-none focus:ring-2 focus:ring-terracotta focus:ring-offset-2 focus:ring-offset-cream;
+      @apply px-8 py-4 bg-gold text-obsidian font-medium rounded-full
+        transition-all duration-300 ease-out
+        hover:bg-gold-soft hover:scale-105
+        active:scale-95
+        focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-obsidian;
   }
 
   .btn-secondary {
-    @apply px-8 py-4 border-2 border-clay text-clay font-medium rounded-full
-           transition-all duration-300 ease-out
-           hover:bg-clay hover:text-cream
-           active:scale-95
-           focus:outline-none focus:ring-2 focus:ring-clay focus:ring-offset-2 focus:ring-offset-cream;
+      @apply px-8 py-4 border-2 border-gold text-ivory font-medium rounded-full
+        transition-all duration-300 ease-out
+        hover:bg-charcoal hover:text-ivory
+        active:scale-95
+        focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-obsidian;
   }
 
   .input-field {
-    @apply w-full px-6 py-4 bg-cream border border-clay/20 rounded-full
-           text-clay placeholder:text-clay/40
-           focus:outline-none focus:border-terracotta focus:ring-2 focus:ring-terracotta/20
-           transition-all duration-300;
+      @apply w-full px-6 py-4 bg-charcoal border border-line rounded-full
+        text-ivory placeholder:text-ivory-dim
+        focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20
+        transition-all duration-300;
   }
 
   .section-container {

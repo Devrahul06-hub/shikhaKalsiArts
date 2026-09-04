@@ -1,28 +1,21 @@
-import { products } from '@/lib/products'
-
 const siteUrl = 'https://shikhakalsiarts.com'
 
+/**
+ * The site is a single page with in-page anchors, so only "/" is a real,
+ * indexable route. Anchor fragments are not separate URLs and must not be
+ * listed here — an earlier version advertised /gallery, /process, /press and a
+ * /shop/[slug] page per product, none of which resolve.
+ */
 export function GET() {
-  const pages = ['/', '/gallery', '/process', '/press']
-
-  const urls = [
-    ...pages.map((p) => ({ loc: `${siteUrl}${p}`, priority: 0.8 })),
-    ...products.map((product) => ({ loc: `${siteUrl}/shop/${product.slug}`, priority: 0.9 })),
-  ]
-
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-  <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    ${urls
-      .map(
-        (u) => `
-      <url>
-        <loc>${u.loc}</loc>
-        <lastmod>${new Date().toISOString()}</lastmod>
-        <priority>${u.priority}</priority>
-      </url>`
-      )
-      .join('')}
-  </urlset>`
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>${siteUrl}/</loc>
+    <lastmod>${new Date().toISOString()}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>`
 
   return new Response(xml, {
     headers: {

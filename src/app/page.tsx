@@ -2,9 +2,7 @@ import { Hero } from '@/components/Hero'
 import { Gallery } from '@/components/Gallery'
 import { ProcessTimeline } from '@/components/ProcessTimeline'
 import { PressMarquee } from '@/components/PressMarquee'
-import InquiryModal from '@/components/InquiryModal'
-import { JsonLd } from '@/components/JsonLd'
-import { products } from '@/lib/products'
+import { WhatsAppFab } from '@/components/WhatsAppFab'
 
 export default function Page() {
   return (
@@ -13,8 +11,7 @@ export default function Page() {
       <Gallery />
       <ProcessTimeline />
       <PressMarquee />
-      <InquiryModal />
-      <JsonLd type="Product" data={products} />
+      <WhatsAppFab />
     </>
   )
 }

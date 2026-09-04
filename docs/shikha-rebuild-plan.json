@@ -1,0 +1,65 @@
+{
+  "prioritizedTasks": [
+    { "id": "T1", "priority": "P0", "title": "Port design system to Tailwind / globals.css", "rationale": "Apply black/gold theme and typography across site; centralizes brand tokens.", "estimateHours": 3 },
+    { "id": "T2", "priority": "P0", "title": "Homepage (mockup v2) implementation", "rationale": "Homepage is primary conversion surface and source-of-truth.", "estimateHours": 10 },
+    { "id": "T3", "priority": "P0", "title": "Process page implementation", "rationale": "Matches provided mockup and supports commissioning flow.", "estimateHours": 4 },
+    { "id": "T4", "priority": "P0", "title": "Collections & Projects data model + pages", "rationale": "Replace product-shop data with collections/projects for B2B narrative.", "estimateHours": 8 },
+    { "id": "T5", "priority": "P0", "title": "Commission enquiry form & secure API route", "rationale": "Primary conversion mechanism for commissions; must validate and record leads.", "estimateHours": 6 },
+    { "id": "T6", "priority": "P0", "title": "Remove/repurpose ceramics content and product data", "rationale": "Avoid misleading ceramics positioning; remove prices and product UI.", "estimateHours": 3 },
+    { "id": "T7", "priority": "P1", "title": "Accessibility fixes from reports", "rationale": "Improve A11y score and compliance; use existing audit files.", "estimateHours": 6 },
+    { "id": "T8", "priority": "P1", "title": "Image optimization & responsive delivery", "rationale": "Use next/image or optimized srcsets and compress assets.", "estimateHours": 4 },
+    { "id": "T9", "priority": "P1", "title": "SEO & JSON-LD per project pages", "rationale": "B2B discovery and rich results for featured projects.", "estimateHours": 5 },
+    { "id": "T10", "priority": "P2", "title": "CMS or content workflow recommendation", "rationale": "Enable non-dev content edits for collections/projects.", "estimateHours": 8 }
+  ],
+  "codeSnippets": [
+    {
+      "filePath": "tailwind.config.js",
+      "description": "Extend Tailwind theme colors for black/gold design system.",
+      "snippet": "module.exports = { theme: { extend: { colors: { obsidian: '#0B0B0A', charcoal: '#211F1C', ivory: '#F3ECDD', 'ivory-dim': '#E8DFC9', gold: '#C9A24B', 'gold-soft': '#DEC386', bronze: '#8B6F3E', stone: '#9A9384' }, fontFamily: { serif: ['Georgia','Times New Roman','serif'], ui: ['Helvetica Neue','Arial','sans-serif'] } } } }"
+    },
+    {
+      "filePath": "src/data/collections.ts",
+      "description": "Example collections data shape to replace product list (TypeScript).",
+      "snippet": "export type Piece = { id: string; title: string; slug: string; images: string[]; caption?: string; tags?: string[] }; export type Collection = { id: string; title: string; slug: string; description: string; heroImage?: string; pieces: Piece[] }; export const collections: Collection[] = [ { id: 'c-wildlife', title: 'Wildlife Sculptures', slug: 'wildlife-sculptures', description: 'Large-scale wildlife works for public and private commissions.', heroImage: '/assets/collections/wildlife/hero.jpg', pieces: [] } ];"
+    },
+    {
+      "filePath": "src/app/api/commission/route.ts",
+      "description": "Secure serverless API route example for commission enquiries (TypeScript).",
+      "snippet": "import { NextResponse } from 'next/server'; export async function POST(request: Request) { try { const body = await request.json(); const { name, email, message, projectType } = body; if (!name || !email || !message) { return NextResponse.json({ error: 'Missing required fields' }, { status: 400 }); } console.log('Commission enquiry', { name, email, projectType }); return NextResponse.json({ status: 'ok' }); } catch (err) { return NextResponse.json({ error: 'Invalid request' }, { status: 400 }); } }"
+    },
+    {
+      "filePath": "src/components/PhPlaceholder.tsx",
+      "description": "Shared placeholder photo component that renders the mockup ph pattern with label.",
+      "snippet": "import React from 'react'; export default function PhPlaceholder({ label, className = '' }: { label: string; className?: string; }) { return (<div className={`ph ph--filled ${className}`} aria-hidden><span className='ph-label'>{label}</span></div>); }"
+    }
+  ],
+  "dataModel": {
+    "layout": [
+      "src/data/collections.ts",
+      "src/data/projects.ts",
+      "src/data/siteMeta.ts"
+    ],
+    "exampleShapes": {
+      "Collection": "{ id, title, slug, description, heroImage, pieces: Piece[] }",
+      "Project": "{ id, title, slug, description, images[], spec: { material, setting, client }, tags[] }"
+    },
+    "migrationNotes": "Remove src/lib/products.ts entries and map relevant assets into collections/projects shapes. Leave photo placeholders for missing images."
+  },
+  "copyVariants": {
+    "heroCTAs": ["Start a Commission","Enquire About a Commission","Begin a Commission"],
+    "commissionCTAs": ["Discuss Your Project","Request Commission Details","Start the Conversation"],
+    "confirmationMessages": ["Thanks — we received your enquiry. We'll respond within 3 business days.","Request received. A member of the studio will contact you soon.","Your enquiry is with the studio. Expect a reply within 72 hours."]
+  },
+  "qaChecklist": [
+    "Homepage matches mockup structure and copy (v2)",
+    "Process page matches provided HTML exactly",
+    "No ceramics/product pricing or fabricated testimonials remain",
+    "All nav links resolve",
+    "Responsive down to mobile per breakpoints",
+    "Image placeholders use the ph pattern with labels",
+    "SEO meta and JSON-LD present for /projects/[slug]",
+    "Run Lighthouse: Performance >= 75, Accessibility >= 90 (target)",
+    "Run axe-core/a11y audit and resolve high-severity issues"
+  ],
+  "designerNotes": "Prioritize hero imagery with high-resolution installation photos (portrait & landscape crops). Supply at least one 2000px wide hero per featured project. Use negative space in layouts; keep gold accents to micro-interactions and hairline dividers. Mark every placeholder clearly so the studio can drop final photography without layout changes."
+}
