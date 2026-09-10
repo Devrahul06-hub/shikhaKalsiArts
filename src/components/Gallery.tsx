@@ -3,7 +3,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { AnimatePresence, motion } from 'framer-motion'
-import { X, ChevronLeft, ChevronRight, Plus } from 'lucide-react'
+import Link from 'next/link'
+import { X, ChevronLeft, ChevronRight, Plus, ArrowRight } from 'lucide-react'
 import { WhatsAppIcon } from '@/components/icons/WhatsAppIcon'
 import { Reveal } from '@/components/motion/Reveal'
 import { whatsappUrl } from '@/lib/contact'
@@ -177,7 +178,21 @@ export function Gallery() {
           </AnimatePresence>
         </motion.div>
 
-        <Reveal className="mt-14 flex flex-col sm:flex-row items-center gap-5 rounded-2xl border border-line/50 bg-charcoal/40 px-7 py-6">
+        <Reveal className="mt-12 flex flex-col sm:flex-row items-center justify-between gap-5 rounded-2xl border border-line/50 bg-charcoal/40 px-7 py-6">
+          <p className="text-ivory/70 text-center sm:text-left">
+            Recent large-scale commissions — temple elephants, a sculpted storefront,
+            an oversized tabla — are shown from clay through to installation.
+          </p>
+          <Link
+            href="/gallery"
+            className="btn-secondary inline-flex shrink-0 items-center justify-center gap-2 text-center"
+          >
+            See recent work
+            <ArrowRight className="w-4 h-4" aria-hidden="true" />
+          </Link>
+        </Reveal>
+
+        <Reveal className="mt-5 flex flex-col sm:flex-row items-center gap-5 rounded-2xl border border-line/50 bg-charcoal/40 px-7 py-6">
           <p className="text-ivory/70 text-center sm:text-left flex-1">
             Looking for something specific — a deity, a portrait, a piece for a
             particular corner? Send a photo or a reference and Shikha will take it
@@ -189,7 +204,7 @@ export function Gallery() {
             )}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex shrink-0 items-center justify-center gap-2.5 px-7 py-3.5 rounded-full bg-gold text-obsidian font-semibold transition-colors hover:bg-gold-soft focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-obsidian"
+            className="btn-primary inline-flex shrink-0 items-center justify-center gap-2.5"
           >
             <WhatsAppIcon className="w-5 h-5" />
             Discuss a commission

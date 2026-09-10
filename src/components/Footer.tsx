@@ -1,5 +1,7 @@
 'use client'
 
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { ArrowUp } from 'lucide-react'
 import { Reveal, RevealItem } from '@/components/motion/Reveal'
 import { stagger } from '@/lib/motion'
@@ -18,14 +20,17 @@ const socials = [
   { name: 'Facebook', href: socialLinks.facebook, Icon: FacebookIcon },
 ]
 
+/** Anchors are relative to the home page, so they need a "/" prefix elsewhere. */
 const exploreLinks = [
-  { label: 'Featured Work', href: '#gallery' },
-  { label: 'Our Process', href: '#process' },
-  { label: 'The Studio', href: '#press' },
-]
+  { label: 'Recent Work', href: '/gallery', type: 'route' },
+  { label: 'Featured Work', href: 'gallery', type: 'section' },
+  { label: 'Our Process', href: 'process', type: 'section' },
+  { label: 'The Studio', href: 'press', type: 'section' },
+] as const
 
 export function Footer() {
   const lenis = useLenis()
+  const onHome = usePathname() === '/'
 
   const scrollToTop = () => {
     if (lenis) lenis.scrollTo(0)
@@ -88,12 +93,12 @@ export function Footer() {
 
         <div className="mt-16 lg:mt-20 grid gap-12 lg:grid-cols-[1.5fr_1fr_1fr] border-t border-line/40 pt-12">
           <div>
-            <a
-              href="#home"
+            <Link
+              href={onHome ? '#home' : '/'}
               className="font-display text-2xl font-medium tracking-tight block mb-4"
             >
               Shikha Kalsi Arts
-            </a>
+            </Link>
             <p className="text-ivory/55 text-sm leading-relaxed max-w-sm">
               Studio producing large-scale fiber composite sculptures and
               architectural installations for commissions, public art, and brand
@@ -112,12 +117,18 @@ export function Footer() {
               <ul className="space-y-3" role="list">
                 {exploreLinks.map((link) => (
                   <li key={link.label}>
-                    <a
-                      href={link.href}
+                    <Link
+                      href={
+                        link.type === 'route'
+                          ? link.href
+                          : onHome
+                            ? `#${link.href}`
+                            : `/#${link.href}`
+                      }
                       className="text-ivory/70 hover:text-gold transition-colors text-sm"
                     >
                       {link.label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>

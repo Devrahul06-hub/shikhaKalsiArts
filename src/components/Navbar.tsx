@@ -8,6 +8,8 @@ import {
   useScroll,
   useTransform,
 } from 'framer-motion'
+import { usePathname } from 'next/navigation'
+import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
 import { WhatsAppIcon } from '@/components/icons/WhatsAppIcon'
 import {
@@ -18,13 +20,19 @@ import {
 import { useLenis } from '@/components/LenisProvider'
 import { socialLinks, whatsappUrl, WHATSAPP_DISPLAY } from '@/lib/contact'
 
+/**
+ * `section` links point at anchors on the home page; `route` links are real
+ * pages. Anchor links have to be prefixed with "/" when the visitor is on
+ * another route, otherwise they resolve against that route and go nowhere.
+ */
 const navLinks = [
-  { id: 'home', label: 'Home' },
-  { id: 'gallery', label: 'Work' },
-  { id: 'process', label: 'Process' },
-  { id: 'press', label: 'Studio' },
-  { id: 'contact', label: 'Contact' },
-]
+  { id: 'home', label: 'Home', type: 'section' },
+  { id: 'gallery', label: 'Work', type: 'section' },
+  { id: 'process', label: 'Process', type: 'section' },
+  { id: 'press', label: 'Studio', type: 'section' },
+  { id: 'contact', label: 'Contact', type: 'section' },
+  { id: '/gallery', label: 'Recent', type: 'route' },
+] as const
 
 const socialIcons = [
   { href: socialLinks.instagram, label: 'Instagram', Icon: InstagramIcon },
@@ -37,6 +45,17 @@ export function Navbar() {
   const [activeSection, setActiveSection] = useState('home')
   const [isCondensed, setIsCondensed] = useState(false)
   const lenis = useLenis()
+  const pathname = usePathname()
+  const onHome = pathname === '/'
+
+  /** Anchors need a leading "/" when we are not already on the home page. */
+  const hrefFor = (link: (typeof navLinks)[number]) =>
+    link.type === 'route' ? link.id : onHome ? `#${link.id}` : `/#${link.id}`
+
+  const isActive = (link: (typeof navLinks)[number]) =>
+    link.type === 'route'
+      ? pathname === link.id
+      : onHome && activeSection === link.id
 
   const { scrollY } = useScroll()
 
@@ -53,8 +72,12 @@ export function Navbar() {
   })
 
   // Track which section is on screen to light up the matching nav item.
+  // Only the home page has these sections, so skip the work entirely elsewhere.
   useEffect(() => {
+    if (!onHome) return
+
     const sections = navLinks
+      .filter((link) => link.type === 'section')
       .map((link) => document.getElementById(link.id))
       .filter((el): el is HTMLElement => Boolean(el))
 
@@ -73,7 +96,12 @@ export function Navbar() {
 
     sections.forEach((section) => observer.observe(section))
     return () => observer.disconnect()
-  }, [])
+  }, [onHome])
+
+  // Close the menu when navigating to another route.
+  useEffect(() => {
+    setIsMobileMenuOpen(false)
+  }, [pathname])
 
   // Momentum scrolling has to be paused explicitly — overflow:hidden alone
   // does not stop Lenis from scrolling the page behind the menu.
@@ -114,8 +142,8 @@ export function Navbar() {
           className="section-container relative flex items-center justify-between gap-8 h-16 lg:h-20"
           aria-label="Main navigation"
         >
-          <a
-            href="#home"
+          <Link
+            href={onHome ? '#home' : '/'}
             className="group flex flex-col justify-center rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-4 focus-visible:ring-offset-obsidian"
             aria-label="Shikha Kalsi Arts — home"
           >
@@ -133,21 +161,21 @@ export function Navbar() {
             >
               Sculpture Studio
             </span>
-          </a>
+          </Link>
 
           <div className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => {
-              const isActive = activeSection === link.id
+              const active = isActive(link)
               return (
-                <a
+                <Link
                   key={link.id}
-                  href={`#${link.id}`}
-                  aria-current={isActive ? 'true' : undefined}
+                  href={hrefFor(link)}
+                  aria-current={active ? 'true' : undefined}
                   className={`relative px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] rounded-full transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold ${
-                    isActive ? 'text-gold' : 'text-ivory/70 hover:text-ivory'
+                    active ? 'text-gold' : 'text-ivory/70 hover:text-ivory'
                   }`}
                 >
-                  {isActive && (
+                  {active && (
                     <motion.span
                       layoutId="nav-active"
                       className="absolute inset-0 rounded-full bg-gold/10 border border-gold/25"
@@ -156,7 +184,7 @@ export function Navbar() {
                     />
                   )}
                   <span className="relative">{link.label}</span>
-                </a>
+                </Link>
               )
             })}
           </div>
@@ -229,11 +257,12 @@ export function Navbar() {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.06 * index + 0.1, duration: 0.3 }}
                     >
-                      <a
-                        href={`#${link.id}`}
+                      <Link
+                        href={hrefFor(link)}
                         onClick={() => setIsMobileMenuOpen(false)}
+                        aria-current={isActive(link) ? 'true' : undefined}
                         className={`flex items-baseline gap-4 py-4 border-b border-line/40 font-display text-2xl transition-colors ${
-                          activeSection === link.id
+                          isActive(link)
                             ? 'text-gold'
                             : 'text-ivory hover:text-gold'
                         }`}
@@ -242,7 +271,7 @@ export function Navbar() {
                           0{index + 1}
                         </span>
                         {link.label}
-                      </a>
+                      </Link>
                     </motion.li>
                   ))}
                 </ul>
