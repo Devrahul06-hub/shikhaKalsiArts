@@ -4,6 +4,7 @@ import './globals.css'
 import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
 import { JsonLd } from '@/components/JsonLd'
+import { siteUrl } from '@/lib/site'
 import { LenisProvider } from '@/components/LenisProvider'
 import MotionProvider from '@/components/MotionProvider'
 import { ScrollProgress } from '@/components/motion/ScrollProgress'
@@ -30,11 +31,11 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://shikhakalsiarts.com'),
+  metadataBase: new URL(siteUrl),
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://shikhakalsiarts.com',
+    url: siteUrl,
     siteName: 'Shikha Kalsi Arts',
     title: 'Shikha Kalsi Arts | Sculpture & Architectural Studio',
     description: 'Studio producing large-scale sculptures and architectural installations for commissions and public art.',

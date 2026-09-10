@@ -1,4 +1,5 @@
 import { socialLinks, WHATSAPP_DISPLAY } from '@/lib/contact'
+import { siteUrl } from '@/lib/site'
 
 /**
  * Structured data for the studio.
@@ -11,7 +12,7 @@ interface JsonLdProps {
   type: 'ArtGallery' | 'LocalBusiness'
 }
 
-const baseUrl = 'https://shikhakalsiarts.com'
+const baseUrl = siteUrl
 const telephone = `+${WHATSAPP_DISPLAY.replace(/[^\d]/g, '')}`
 
 const sharedDetails = {

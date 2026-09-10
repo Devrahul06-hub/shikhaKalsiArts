@@ -1,4 +1,4 @@
-const siteUrl = 'https://shikhakalsiarts.com'
+import { siteUrl } from '@/lib/site'
 
 /**
  * Only real, indexable routes belong here. In-page anchors (#gallery, #process,

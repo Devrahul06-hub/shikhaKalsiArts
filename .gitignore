@@ -2,3 +2,14 @@ node_modules/
 .DS_Store
 .next/
 *.tsbuildinfo
+
+# Local environment files — real values must not be committed.
+# .env.example is the tracked template.
+.env
+.env.local
+.env*.local
+!.env.example
+
+# Deployment provider caches
+.vercel
+.netlify

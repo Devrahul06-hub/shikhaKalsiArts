@@ -1,16 +1,16 @@
-export function GET(request: Request) {
+import { siteUrl } from '@/lib/site'
+
+export function GET() {
   const body = `User-agent: *
 Allow: /
-Sitemap: https://shikhakalsiarts.com/sitemap.xml
-Host: https://shikhakalsiarts.com
 
-# Disallow indexing of staging or private paths
-Disallow: /private
-`;
+Sitemap: ${siteUrl}/sitemap.xml
+`
 
   return new Response(body, {
     headers: {
       'Content-Type': 'text/plain',
+      'Cache-Control': 'public, max-age=86400',
     },
   })
 }
