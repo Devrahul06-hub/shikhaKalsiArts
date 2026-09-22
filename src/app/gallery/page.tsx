@@ -1,23 +1,23 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
-import { RecentWorkGallery } from '@/components/RecentWorkGallery'
+import { CatalogueGallery } from '@/components/CatalogueGallery'
 import { WhatsAppFab } from '@/components/WhatsAppFab'
-import { recentImageCount, recentProjects } from '@/data/recentWork'
+import { collections, totalImages } from '@/data/catalogue'
 
 export const metadata: Metadata = {
-  title: 'Recent Work',
+  title: 'Work',
   description:
-    'Recent large-scale commissions from the Shikha Kalsi Arts studio: temple entrance elephants, a sculpted storefront facade, and an oversized tabla — shown from clay through to installation.',
+    'The Shikha Kalsi Arts catalogue: temple entrances, storefront facades, brand activations, life-size animals, oversized objects and interior pieces — shown from clay through to installation.',
   alternates: { canonical: '/gallery' },
   openGraph: {
-    title: 'Recent Work | Shikha Kalsi Arts',
+    title: 'Work | Shikha Kalsi Arts',
     description:
-      'Temple entrance elephants, a sculpted storefront facade, and an oversized tabla — from clay through to installation.',
+      'Temple entrances, storefront facades, brand activations, life-size animals and oversized objects — from clay through to installation.',
     url: '/gallery',
     images: [
       {
-        url: '/assets/Elephant 1.1.jpeg',
+        url: '/assets/catalogue/temple-elephants-installed.jpg',
         width: 1200,
         height: 630,
         alt: 'Carved temple entrance with elephant sculptures by Shikha Kalsi Arts',
@@ -40,36 +40,29 @@ export default function GalleryPage() {
           </Link>
 
           <p className="mt-10 text-[0.65rem] uppercase tracking-[0.35em] text-gold">
-            Recently added · {recentImageCount} photographs
+            {collections.length} projects · {totalImages} photographs
           </p>
           <h1 className="mt-5 font-display text-4xl sm:text-5xl lg:text-6xl font-medium leading-[1.08] text-ivory tracking-tight text-balance">
-            Latest from
-            <span className="text-gold"> the studio</span>
+            Everything the studio
+            <span className="text-gold"> has made</span>
           </h1>
           <p className="mt-6 text-lg text-ivory/65 leading-relaxed">
-            Three recent large-scale commissions, photographed from clay through to
-            installation. Most of what leaves the studio is one of a kind, so these
-            are shown as projects rather than a catalogue.
+            Temple entrances and carved ceilings, storefronts and brand
+            activations, life-size animals, everyday objects rebuilt many times
+            their size. Almost all of it made once, to a brief — so each project is
+            shown from clay through to the day it was installed.
           </p>
 
-          <ul
-            className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-ivory/60"
-            role="list"
-          >
-            {recentProjects.map((project) => (
-              <li key={project.id} className="flex items-center gap-2.5">
-                <span
-                  className="w-1.5 h-1.5 rounded-full bg-gold"
-                  aria-hidden="true"
-                />
-                {project.title}
-              </li>
-            ))}
-          </ul>
+          <p className="mt-5 text-sm text-ivory/50 leading-relaxed">
+            Pieces offered in more than one finish also show colourway studies.
+            Those are marked <span className="text-ivory/70">Visualisation</span> —
+            they are renders of available options, not photographs of delivered
+            work.
+          </p>
         </header>
 
-        <div className="mt-20 lg:mt-24">
-          <RecentWorkGallery />
+        <div className="mt-16">
+          <CatalogueGallery />
         </div>
       </div>
 

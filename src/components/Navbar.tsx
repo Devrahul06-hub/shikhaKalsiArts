@@ -31,7 +31,7 @@ const navLinks = [
   { id: 'process', label: 'Process', type: 'section' },
   { id: 'press', label: 'Studio', type: 'section' },
   { id: 'contact', label: 'Contact', type: 'section' },
-  { id: '/gallery', label: 'Recent', type: 'route' },
+  { id: '/gallery', label: 'Catalogue', type: 'route' },
 ] as const
 
 const socialIcons = [

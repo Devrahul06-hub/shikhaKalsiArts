@@ -1,6 +1,6 @@
 # Shikha Kalsi Arts — Enhancement Log & Open Questions
 
-Last updated: 2026-09-04.
+Last updated: 2026-09-22.
 
 ## Contact model
 
@@ -126,35 +126,104 @@ left stuck invisible, which is the usual failure mode of `whileInView` reveals.
 
 ---
 
-## Open question — positioning vs. portfolio
+## Positioning vs. portfolio — resolved
 
-The site copy describes a studio doing **"large-scale fiber composite sculptures and
-architectural installations for public spaces and brand collaborations"**, and the hero
-credentials still read "Large-scale commissions" / "Public art & installations".
+This was an open question through several earlier passes: the site claimed
+"large-scale fiber composite sculptures and architectural installations for
+public spaces and brand collaborations", while the only photographs available
+showed studio-scale devotional pieces.
 
-The 7 actual photographs show something different: **studio-scale devotional and figurative
-work** — a chrome Ganesha, a terracotta meditation bust, a lotus Buddha, a seated Buddha, a
-terracotta deity relief, a hand-painted pet portrait, and a gold-leaf eagle.
-
-I rewrote the Gallery, Studio, and Process sections to match what the photos actually show, but
-**left the hero headline, hero credentials, and `layout.tsx` SEO metadata as-is** — whether the
-studio genuinely takes large-scale architectural work is a business fact I can't verify.
-
-**Decide one of:**
-- The studio does do large-scale/public work → supply photos of it, and revert the Gallery
-  and Process copy toward that positioning.
-- The studio's focus is devotional/figurative/portrait commissions → update the hero headline,
-  hero credential list, and the `description`/`keywords` in `src/app/layout.tsx`, which still
-  say "architectural installations" and "public art".
+The September 2026 catalogue import settles it. The claim is accurate and then
+some — temple entrances and carved ceilings, a storefront facade, a fleet of
+branded transit fittings, life-size animals, a walk-in shark, event scenography.
+The hero copy and `layout.tsx` metadata no longer overstate anything.
 
 ## Other remaining items
 
-- Supply real photography. Seven images (several of which look like renders/stock styling) is
-  thin for a portfolio, and the same Buddha photo currently appears in the hero, the gallery,
-  and process stage 04.
+- The homepage still draws on the original seven studio photographs via
+  `src/data/works.ts`, so the same Buddha image appears in the hero, the homepage
+  gallery, and process stage 04. Worth re-cutting the homepage from the catalogue
+  now that 133 images are available.
 - Delete the 35 duplicate image files in `public/assets` once nothing references them.
 - `src/data/collections.ts` and `src/data/projects.ts` are unused stubs — either populate them
   or delete them (`src/data/works.ts` is what the Gallery reads).
 - Confirm the Facebook URL: `facebook.com/share/v/14quA2z4ucn/` is a **video share link**, not
   a page URL. A `facebook.com/<pagename>` link would be more stable.
 - Consider `next/image` `placeholder="blur"` on gallery images for a smoother load.
+
+
+---
+
+## Catalogue import (September 2026)
+
+135 images imported from `~/Downloads/SKA_catalogue_images`, converted to JPEG
+and capped at 1600px on the long edge with `sips` (the source set was 93 MB,
+including a single 9.3 MB PNG; it is now 58 MB). They live in
+`public/assets/catalogue/` with descriptive names.
+
+`src/data/catalogue.ts` organises 133 of them into **26 projects across 6
+categories**. Two were set aside: the studio logo, moved to
+`public/assets/brand-logo.jpg` since it is a brand asset rather than portfolio,
+and one redundant primed-animal shot.
+
+`/gallery` now renders the whole catalogue with category filters, replacing the
+three hardcoded projects. `src/data/recentWork.ts` and
+`RecentWorkGallery.tsx` were superseded and removed.
+
+### Renders are labelled, not hidden
+
+Roughly a quarter of the catalogue is colourway and placement studies rather
+than photographs of delivered pieces — the Dhyana and Buddha colourways, the
+coral planter set, the planter range board, two clinic placement studies for the
+knee sculpture, and the two interior mockups for the face reliefs.
+
+These are genuinely useful for a made-to-order studio, so they are shown, but
+carry a `Visualisation` stage badge with a dashed outline that reads differently
+from the solid In progress / Finishing / Finished / Installed badges, and the
+page header explains the distinction. Nothing reads as a delivered photograph
+that isn't one.
+
+### Grid
+
+Column count follows image count so a project never strands one card beside two
+empty cells: counts divisible by three go 3-up at `lg`, even counts go 2-up with
+a shorter 4:3 crop so the wider cards don't tower.
+
+### Performance
+
+`next.config.js` trims `deviceSizes` to four buckets and `imageSizes` to two.
+The defaults (8 and 8) multiplied srcset entries across 130+ images: 1330
+entries and 417 KB of HTML, now 798 and 368 KB. Measured against a control
+build with the defaults restored, the homepage is unaffected (97 vs 96, within
+run-to-run noise) while `/gallery` gained two points.
+
+Production build, Lighthouse (mobile emulation, 4× CPU throttle):
+
+| Route | Performance | Accessibility | Best Practices | SEO |
+| --- | --- | --- | --- | --- |
+| `/` | 96–97 | 100 | 96 | 100 |
+| `/gallery` | 96 | 100 | 96 | 100 |
+
+CLS 0 and TBT 0 ms on both. axe-core reports no WCAG 2.1 AA violations on
+`/gallery` with all 133 images rendered, none broken. No horizontal overflow at
+390 px or 1440 px.
+
+Note: an earlier entry above records the homepage at Performance 100 / LCP 1.7s.
+Re-measuring the same homepage code now gives 96–97 / LCP 2.6s, and a control
+build isolates the difference to measurement conditions rather than a code
+change. Treat the numbers in this section as current.
+
+### Still worth doing
+
+- **Re-cut the homepage from the catalogue.** It still runs on the original
+  seven photographs via `src/data/works.ts`.
+- **`public/assets/brand-logo.jpg` is unused.** It is the studio's gold roundel
+  logo and would serve well as a favicon and in the nav.
+- **Several source images carry burned-in caption bars** ("Material: … Finish: …
+  Made to order") from a print catalogue. They read fine but duplicate the
+  captions the page already renders; cleaner crops would look better.
+- **`Ceiling 2.jpeg` in `public/assets` is still the watermarked video grab** and
+  is still not published. The catalogue has four clean ceiling photographs that
+  supersede it, so the old file can be deleted.
+- **The original 53 files in `public/assets`** (18 unique, 35 duplicates) are now
+  only used by the homepage. Once the homepage is re-cut, that whole set can go.

@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import Image from 'next/image'
 import { AnimatePresence, motion } from 'framer-motion'
 import { X, ChevronLeft, ChevronRight, Plus } from 'lucide-react'
@@ -8,32 +8,60 @@ import { Reveal, RevealItem } from '@/components/motion/Reveal'
 import { WhatsAppIcon } from '@/components/icons/WhatsAppIcon'
 import { whatsappUrl } from '@/lib/contact'
 import { stagger, transitions } from '@/lib/motion'
-import { recentImages, recentProjects } from '@/data/recentWork'
+import {
+  categories,
+  collections,
+  type CatalogueImage,
+  type CategoryId,
+  type Stage,
+} from '@/data/catalogue'
 
-const stageTone: Record<string, string> = {
+const stageTone: Record<Stage, string> = {
   'In progress': 'bg-bronze/15 text-bronze border-bronze/30',
   Finishing: 'bg-stone/15 text-stone border-stone/30',
+  Finished: 'bg-ivory/10 text-ivory/80 border-ivory/25',
   Installed: 'bg-gold/15 text-gold border-gold/30',
+  // Visually distinct on purpose: these are renders, not delivered pieces.
+  Visualisation: 'bg-transparent text-ivory/60 border-dashed border-ivory/35',
 }
 
-export function RecentWorkGallery() {
-  // Index into the flat `recentImages` list so arrow keys walk the whole page.
+type Filter = CategoryId | 'all'
+
+export function CatalogueGallery() {
+  const [filter, setFilter] = useState<Filter>('all')
   const [openIndex, setOpenIndex] = useState<number | null>(null)
   const closeButtonRef = useRef<HTMLButtonElement>(null)
   const lastFocused = useRef<HTMLElement | null>(null)
 
-  const active = openIndex !== null ? recentImages[openIndex] : null
+  const visible = useMemo(
+    () =>
+      filter === 'all'
+        ? collections
+        : collections.filter((c) => c.category === filter),
+    [filter]
+  )
 
+  // Flat list of what is currently on screen, so the lightbox arrows walk the
+  // filtered set rather than the whole catalogue.
+  const flat = useMemo<CatalogueImage[]>(
+    () => visible.flatMap((c) => c.images),
+    [visible]
+  )
+
+  const active = openIndex !== null ? flat[openIndex] : null
   const close = useCallback(() => setOpenIndex(null), [])
 
-  const step = useCallback((direction: number) => {
-    setOpenIndex((current) => {
-      if (current === null) return current
-      const next = current + direction
-      if (next < 0 || next >= recentImages.length) return current
-      return next
-    })
-  }, [])
+  const step = useCallback(
+    (direction: number) => {
+      setOpenIndex((current) => {
+        if (current === null) return current
+        const next = current + direction
+        if (next < 0 || next >= flat.length) return current
+        return next
+      })
+    },
+    [flat.length]
+  )
 
   useEffect(() => {
     if (openIndex === null) return
@@ -54,55 +82,95 @@ export function RecentWorkGallery() {
     }
   }, [openIndex, close, step])
 
-  // Running offset so each thumbnail knows its position in the flat list.
-  let flatIndex = -1
+  const filters: { id: Filter; label: string }[] = [
+    { id: 'all', label: 'All work' },
+    ...categories.map((c) => ({ id: c.id as Filter, label: c.label })),
+  ]
 
   return (
     <>
-      <div className="space-y-20 lg:space-y-28">
-        {recentProjects.map((project) => (
-          <section key={project.id} aria-labelledby={`${project.id}-heading`}>
-            <Reveal className="max-w-2xl">
-              <p className="text-[0.65rem] uppercase tracking-[0.3em] text-gold mb-4">
-                {project.kind}
-              </p>
-              <h2
-                id={`${project.id}-heading`}
-                className="font-display text-3xl lg:text-4xl font-medium text-ivory text-balance"
-              >
-                {project.title}
-              </h2>
-              <p className="mt-4 text-ivory/65 leading-relaxed">{project.summary}</p>
-            </Reveal>
-
-            {/* Column count follows the image count so a project never ends on
-                a half-empty row: 3 images sit in a row of three, 4 in two pairs. */}
-            <Reveal
-              stagger={stagger.tight}
-              delay={0.05}
-              className={`mt-10 grid grid-cols-1 sm:grid-cols-2 gap-5 ${
-                project.images.length % 3 === 0 ? 'lg:grid-cols-3' : ''
+      <Reveal
+        className="flex flex-wrap gap-2"
+        distance={16}
+        role="group"
+        aria-label="Filter work by category"
+      >
+        {filters.map(({ id, label }) => {
+          const isActive = filter === id
+          return (
+            <button
+              key={id}
+              onClick={() => {
+                setFilter(id)
+                setOpenIndex(null)
+              }}
+              aria-pressed={isActive}
+              className={`px-5 py-2.5 rounded-full text-sm font-medium transition-colors duration-[180ms] ease-[cubic-bezier(0.65,0,0.35,1)] focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-obsidian ${
+                isActive
+                  ? 'bg-gold text-obsidian'
+                  : 'bg-charcoal/60 text-ivory/70 border border-line hover:text-ivory hover:border-gold/50'
               }`}
             >
-              {project.images.map((image) => {
-                flatIndex += 1
-                const index = flatIndex
-                return (
+              {label}
+            </button>
+          )
+        })}
+      </Reveal>
+
+      <div className="mt-16 space-y-20 lg:space-y-24">
+        {visible.map((project) => {
+          // Offset of this collection's first image within the flat list.
+          const offset = flat.indexOf(project.images[0])
+
+          // Pick the column count that leaves the fewest empty cells in the
+          // last row — a lone card stranded beside two gaps reads as a bug.
+          // Wider cards then take a shorter crop so they don't tower.
+          const count = project.images.length
+          const threeUp = count % 3 === 0 || (count % 2 !== 0 && count % 3 !== 0)
+          const gridCols = threeUp ? 'lg:grid-cols-3' : 'lg:grid-cols-2'
+          const cardAspect = threeUp ? 'aspect-[4/5]' : 'aspect-[4/5] lg:aspect-[4/3]'
+          const sizes = threeUp
+            ? '(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 400px'
+            : '(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 620px'
+
+          return (
+            <section key={project.id} aria-labelledby={`${project.id}-heading`}>
+              <Reveal className="max-w-2xl">
+                <p className="text-[0.65rem] uppercase tracking-[0.3em] text-gold mb-4">
+                  {project.kind}
+                </p>
+                <h2
+                  id={`${project.id}-heading`}
+                  className="font-display text-3xl lg:text-4xl font-medium text-ivory text-balance"
+                >
+                  {project.title}
+                </h2>
+                <p className="mt-4 text-ivory/65 leading-relaxed">
+                  {project.summary}
+                </p>
+              </Reveal>
+
+              <Reveal
+                stagger={stagger.tight}
+                delay={0.05}
+                className={`mt-10 grid grid-cols-1 sm:grid-cols-2 gap-5 ${gridCols}`}
+              >
+                {project.images.map((image, i) => (
                   <RevealItem key={image.src} className="group">
                     <button
-                      onClick={() => setOpenIndex(index)}
+                      onClick={() => setOpenIndex(offset + i)}
                       className="w-full text-left rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-4 focus-visible:ring-offset-obsidian"
                       aria-label={`View larger: ${image.caption}`}
                     >
-                      <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-line/40 bg-charcoal">
+                      <div
+                        className={`relative ${cardAspect} overflow-hidden rounded-2xl border border-line/40 bg-charcoal`}
+                      >
                         <Image
                           src={image.src}
                           alt={image.alt}
                           fill
                           className="object-cover transition-transform duration-[450ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]"
-                          // Covers both grid layouts: ~45vw for the 2-column
-                          // projects, which over-serves the 3-column ones slightly.
-                          sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 45vw"
+                          sizes={sizes}
                         />
                         <div
                           className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-obsidian via-obsidian/70 to-transparent"
@@ -118,9 +186,7 @@ export function RecentWorkGallery() {
 
                         <div className="absolute inset-x-0 bottom-0 p-5">
                           <span
-                            className={`inline-block px-2.5 py-1 rounded-full border text-[0.6rem] uppercase tracking-[0.18em] ${
-                              stageTone[image.stage] ?? stageTone.Installed
-                            }`}
+                            className={`inline-block px-2.5 py-1 rounded-full border text-[0.6rem] uppercase tracking-[0.18em] ${stageTone[image.stage]}`}
                           >
                             {image.stage}
                           </span>
@@ -131,21 +197,21 @@ export function RecentWorkGallery() {
                       </div>
                     </button>
                   </RevealItem>
-                )
-              })}
-            </Reveal>
-          </section>
-        ))}
+                ))}
+              </Reveal>
+            </section>
+          )
+        })}
       </div>
 
       <Reveal className="mt-20 flex flex-col sm:flex-row items-center gap-5 rounded-2xl border border-line/50 bg-charcoal/40 px-7 py-6">
         <p className="flex-1 text-ivory/70 text-center sm:text-left">
-          Working on something at this scale — an entrance, a facade, a piece for a
-          courtyard? Send the space and the idea across.
+          Most of this was made once, to a brief. If you have a space, a product,
+          or an idea that needs building at scale, send it across.
         </p>
         <a
           href={whatsappUrl(
-            "Hello Shikha Kalsi Arts, I saw your recent work and I'd like to discuss a large-scale commission."
+            "Hello Shikha Kalsi Arts, I saw your catalogue and I'd like to discuss a commission."
           )}
           target="_blank"
           rel="noopener noreferrer"
@@ -190,10 +256,7 @@ export function RecentWorkGallery() {
                 <X className="w-5 h-5" aria-hidden="true" />
               </button>
 
-              {/* Height-driven rather than a fixed aspect ratio: these photos
-                  are a mix of portrait and landscape, and object-contain inside
-                  a 4:3 box letterboxed most of them. */}
-              <div className="relative w-full h-[58vh] sm:h-[66vh] rounded-2xl overflow-hidden border border-line bg-charcoal">
+              <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-line bg-charcoal">
                 <Image
                   src={active.src}
                   alt={active.alt}
@@ -206,9 +269,7 @@ export function RecentWorkGallery() {
               <div className="mt-4 flex items-center justify-between gap-4">
                 <div className="min-w-0">
                   <span
-                    className={`inline-block px-2.5 py-1 rounded-full border text-[0.6rem] uppercase tracking-[0.18em] ${
-                      stageTone[active.stage] ?? stageTone.Installed
-                    }`}
+                    className={`inline-block px-2.5 py-1 rounded-full border text-[0.6rem] uppercase tracking-[0.18em] ${stageTone[active.stage]}`}
                   >
                     {active.stage}
                   </span>
@@ -225,11 +286,11 @@ export function RecentWorkGallery() {
                     <ChevronLeft className="w-5 h-5" aria-hidden="true" />
                   </button>
                   <span className="text-xs tracking-[0.2em] text-ivory/60 tabular-nums">
-                    {openIndex + 1} / {recentImages.length}
+                    {openIndex + 1} / {flat.length}
                   </span>
                   <button
                     onClick={() => step(1)}
-                    disabled={openIndex === recentImages.length - 1}
+                    disabled={openIndex === flat.length - 1}
                     className="inline-flex items-center justify-center w-11 h-11 rounded-full border border-line text-ivory/70 transition-colors hover:text-gold hover:border-gold disabled:opacity-30 disabled:hover:text-ivory/70 disabled:hover:border-line focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
                     aria-label="Next image"
                   >

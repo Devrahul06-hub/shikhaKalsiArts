@@ -194,21 +194,29 @@ export function Gallery() {
 
         <Reveal className="mt-5 flex flex-col sm:flex-row items-center gap-5 rounded-2xl border border-line/50 bg-charcoal/40 px-7 py-6">
           <p className="text-ivory/70 text-center sm:text-left flex-1">
-            Looking for something specific — a deity, a portrait, a piece for a
-            particular corner? Send a photo or a reference and Shikha will take it
-            from there.
+            These are studio pieces. The catalogue also covers temple entrances,
+            storefronts, brand activations, and life-size animals.
           </p>
-          <a
-            href={whatsappUrl(
-              "Hello Shikha Kalsi Arts, I saw your work and I'd like to discuss a commission."
-            )}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-primary inline-flex shrink-0 items-center justify-center gap-2.5"
-          >
-            <WhatsAppIcon className="w-5 h-5" />
-            Discuss a commission
-          </a>
+          <div className="flex flex-col sm:flex-row shrink-0 items-stretch sm:items-center gap-3">
+            <Link
+              href="/gallery"
+              className="btn-secondary inline-flex items-center justify-center gap-2 text-center"
+            >
+              See all work
+              <ArrowRight className="w-4 h-4" aria-hidden="true" />
+            </Link>
+            <a
+              href={whatsappUrl(
+                "Hello Shikha Kalsi Arts, I saw your work and I'd like to discuss a commission."
+              )}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary inline-flex items-center justify-center gap-2.5"
+            >
+              <WhatsAppIcon className="w-5 h-5" />
+              Discuss a commission
+            </a>
+          </div>
         </Reveal>
       </div>
 
