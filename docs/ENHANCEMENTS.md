@@ -1,6 +1,6 @@
 # Shikha Kalsi Arts — Enhancement Log & Open Questions
 
-Last updated: 2026-09-22.
+Last updated: 2026-09-23.
 
 ## Contact model
 
@@ -227,3 +227,80 @@ change. Treat the numbers in this section as current.
   supersede it, so the old file can be deleted.
 - **The original 53 files in `public/assets`** (18 unique, 35 duplicates) are now
   only used by the homepage. Once the homepage is re-cut, that whole set can go.
+
+
+---
+
+## Image pipeline (September 2026)
+
+The site was slow on first load after deploying. Measured cause: **on-demand
+image optimization**, not page weight.
+
+With Next's default optimizer, every width of every image is transformed at
+request time. Measured locally with a cold cache, that was **~300ms per
+transform** (444× slower than a warm hit), and scrolling `/gallery` fires ~94 of
+them. The first visitor after every deploy paid all of it, and on Vercel it also
+consumes image-optimization quota.
+
+The photographs never change per request, so the work was moved to build time:
+
+- `scripts/optimize-images.mjs` scans `src/` for referenced `/assets/…` images
+  and emits WebP variants at 640/828/1080/1920 into `public/optimized/`.
+  It never upscales and skips variants newer than their source.
+- `src/lib/imageLoader.ts` is a custom `next/image` loader pointing at those
+  files, so `next/image` still builds a real srcset — the work just happens
+  ahead of time. `next.config.js` sets `loader: 'custom'`, which bypasses the
+  runtime optimizer entirely.
+- Wired into `npm run build`, so a deploy regenerates them (~22s for 396
+  variants). `public/optimized/` is gitignored rather than adding 30MB to the
+  repo.
+
+The three width lists must stay in sync: `WIDTHS` in the script, `VARIANT_WIDTHS`
+in the loader, and `deviceSizes` in `next.config.js`.
+
+### Result
+
+| | Before | After |
+| --- | --- | --- |
+| Image requests on `/gallery` | `/_next/image` transforms | static `.webp` files |
+| Cold cost per image | ~300 ms | none (plain static serve) |
+| Gallery Speed Index | 1.3 s | 0.9 s |
+| Homepage initial view | 0.24 MB | 0.35 MB |
+| Gallery initial view | 0.45 MB | 0.51 MB |
+| Gallery, fully scrolled | 3.67 MB / 94 imgs | 6.89 MB / 133 imgs |
+
+Lighthouse is unchanged (96 / 100 / 96 / 100 on both routes, CLS 0, TBT 0ms)
+because it measures a **warm** server, where the old optimizer was also fast.
+The win is specifically on cold requests, which is what a real visitor hits.
+
+### The honest trade
+
+Bytes went slightly **up**. Next's optimizer was serving AVIF via content
+negotiation; the pre-built variants are WebP, which is ~40% larger at
+equivalent quality. AVIF was rejected because ~5% of visitors (older Safari/iOS)
+would get broken images, and serving both needs `<picture>` — a refactor across
+six components. Latency mattered more than the bytes here.
+
+If that changes, the upgrade path is a small `<picture>`-based component
+emitting AVIF with a WebP fallback; the script already has the source images and
+sharp can emit both.
+
+Quality is WebP q68, chosen by comparing q60/68/75/78 against AVIF on three
+representative images. Visually clean at card size.
+
+### Also removed
+
+`src/data/collections.ts` and `src/data/projects.ts` — unused stubs flagged in
+earlier passes. One referenced `/assets/installation-1-main.jpg`, which does not
+exist, and the optimizer surfaced it.
+
+### Not done
+
+- **58MB of master JPEGs in `public/assets` are deployed but never served** —
+  only the WebP variants are requested now. They can't simply move out of
+  `public/`, because two are referenced directly as Open Graph images
+  (`layout.tsx` and `gallery/page.tsx`), and social scrapers want real URLs.
+  Worth restructuring if deploy size becomes a problem.
+- **Blur placeholders.** Cards use a `bg-charcoal` background so images don't
+  pop from white, which covers most of the benefit. `placeholder="blur"` with a
+  custom loader needs `blurDataURL` generated into a lookup map.
