@@ -12,7 +12,7 @@
  */
 
 /** Must stay in sync with WIDTHS in scripts/optimize-images.mjs. */
-const VARIANT_WIDTHS = [640, 828, 1080, 1920]
+const VARIANT_WIDTHS = [640, 828, 1080, 1280, 1920]
 
 export default function imageLoader({
   src,

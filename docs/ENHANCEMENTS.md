@@ -1,6 +1,6 @@
 # Shikha Kalsi Arts — Enhancement Log & Open Questions
 
-Last updated: 2026-09-23.
+Last updated: 2026-09-26.
 
 ## Contact model
 
@@ -304,3 +304,45 @@ exist, and the optimizer surfaced it.
 - **Blur placeholders.** Cards use a `bg-charcoal` background so images don't
   pop from white, which covers most of the benefit. `placeholder="blur"` with a
   custom loader needs `blurDataURL` generated into a lookup map.
+
+
+---
+
+## Broken images on Retina displays (fixed, 2026-09-26)
+
+The image pipeline above shipped with a real bug: most of the gallery was
+broken for anyone on a high-DPI screen.
+
+**Cause.** `optimize-images.mjs` skipped any width larger than the source, to
+avoid upscaling. Catalogue sources are capped at 1600px, so the 1920 variant
+was never generated for anything — but `next/image` still put 1920 in every
+srcset and used it as the fallback `src`. The loader derives the filename from
+the requested width alone; it has no idea which files exist. So a browser
+asking for the largest variant got a 404.
+
+| Device pixel ratio | Broken images on /gallery |
+| --- | --- |
+| 1 | 0 of 133 |
+| 2 (Retina) | **83 of 133** |
+| 3 | **133 of 133** |
+
+**Why it got through.** The verification after the pipeline change only ran at
+DPR 1, where the browser never requests anything above the 640 variant. The
+gaps were invisible at that one setting. Any check of responsive images has to
+cover DPR 2 and 3 — that is where the larger srcset entries are exercised.
+
+**Fix.** Generate every width for every image. `withoutEnlargement` still
+prevents upscaling, so a 1600px source is written at 1600px under the `-1920`
+name; the URL resolves and the bytes are honest. The script now also fails the
+build if any expected variant is missing, rather than shipping 404s.
+
+**Also added a 1280 bucket.** The 2-up collections render ~620px cards, which
+at DPR 2 need ~1240px — with the old ladder that jumped straight to 1920.
+Adding 1280 cut the DPR-2 initial view from 1.29 MB to 1.07 MB.
+
+Three lists must stay in sync: `WIDTHS` (script), `VARIANT_WIDTHS` (loader),
+`deviceSizes` (next.config.js). All three are now `[640, 828, 1080, 1280, 1920]`.
+
+Verified after the fix: 0 broken images and 0 404s across DPR 1, 2 and 3 on the
+homepage, the gallery, and the lightbox, plus mobile at DPR 3. Lighthouse
+unchanged at 96 / 100 / 96 / 100 on both routes, CLS 0, TBT 0ms.

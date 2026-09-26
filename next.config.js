@@ -18,7 +18,7 @@ const nextConfig = {
 
     // Must stay in sync with WIDTHS in scripts/optimize-images.mjs and
     // VARIANT_WIDTHS in src/lib/imageLoader.ts.
-    deviceSizes: [640, 828, 1080, 1920],
+    deviceSizes: [640, 828, 1080, 1280, 1920],
     imageSizes: [256, 384],
   },
   poweredByHeader: false,

@@ -27,7 +27,7 @@ const OUT_ROOT = path.join(PUBLIC, 'optimized')
 const SRC_DIR = path.join(ROOT, 'src')
 
 /** Must stay in sync with `deviceSizes` in next.config.js. */
-export const WIDTHS = [640, 828, 1080, 1920]
+export const WIDTHS = [640, 828, 1080, 1280, 1920]
 const QUALITY = 68
 
 async function walk(dir, filter) {
@@ -80,16 +80,21 @@ async function main() {
     }
 
     const srcStat = await stat(src)
-    const meta = await sharp(src).metadata()
     const outDir = path.join(OUT_ROOT, path.dirname(r))
     await mkdir(outDir, { recursive: true })
     const base = path.basename(r).replace(/\.[^.]+$/, '')
 
+    // Every width must exist for every image. The loader picks a variant from
+    // the requested width alone — it has no way to know which files were
+    // written — and next/image puts all of them in the srcset. Skipping the
+    // ones larger than the source produced 404s on any display with
+    // device-pixel-ratio > 1: sources are capped at 1600px, so no -1920 variant
+    // was ever generated and 83/133 images broke at DPR 2, all 133 at DPR 3.
+    //
+    // `withoutEnlargement` means a smaller source is not upscaled — it is just
+    // written at its native size under the larger name, so the URL resolves and
+    // the bytes are honest.
     for (const w of WIDTHS) {
-      // Never upscale: a 1200px original gets no 1920 variant, and the loader
-      // falls back to the largest one that exists.
-      if (meta.width && w > meta.width && w !== WIDTHS[0]) continue
-
       const outFile = path.join(outDir, `${base}-${w}.webp`)
       if (existsSync(outFile)) {
         const outStat = await stat(outFile)
@@ -118,6 +123,36 @@ async function main() {
   )
   console.log(
     `optimize-images: sources ${mb(bytesIn)} MB -> variants ${mb(bytesOut)} MB`
+  )
+
+  // Fail the build rather than ship 404s. The loader can emit any width in
+  // WIDTHS for any referenced image, so every one of those files must exist.
+  // This previously slipped through because a DPR-1 browser only ever requests
+  // the smallest variant — the gaps were invisible until a Retina screen asked
+  // for a larger one.
+  const gaps = []
+  for (const r of rel) {
+    if (!existsSync(path.join(ASSETS, r))) continue
+    const dir = path.join(OUT_ROOT, path.dirname(r))
+    const base = path.basename(r).replace(/\.[^.]+$/, '')
+    for (const w of WIDTHS) {
+      if (!existsSync(path.join(dir, `${base}-${w}.webp`))) {
+        gaps.push(`${path.dirname(r)}/${base}-${w}.webp`)
+      }
+    }
+  }
+
+  if (gaps.length) {
+    console.error(
+      `\noptimize-images: ${gaps.length} variant(s) missing — these would 404:`
+    )
+    gaps.slice(0, 10).forEach((g) => console.error(`  ${g}`))
+    if (gaps.length > 10) console.error(`  …and ${gaps.length - 10} more`)
+    process.exit(1)
+  }
+
+  console.log(
+    `optimize-images: verified ${rel.length - missing} images x ${WIDTHS.length} widths, no gaps`
   )
 }
 
