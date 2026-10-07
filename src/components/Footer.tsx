@@ -11,7 +11,6 @@ import {
   LinkedInIcon,
   FacebookIcon,
 } from '@/components/icons/SocialIcons'
-import { useLenis } from '@/components/LenisProvider'
 import { socialLinks, whatsappUrl, WHATSAPP_DISPLAY } from '@/lib/contact'
 
 const socials = [
@@ -29,12 +28,10 @@ const exploreLinks = [
 ] as const
 
 export function Footer() {
-  const lenis = useLenis()
   const onHome = usePathname() === '/'
 
   const scrollToTop = () => {
-    if (lenis) lenis.scrollTo(0)
-    else window.scrollTo({ top: 0, behavior: 'smooth' })
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   return (

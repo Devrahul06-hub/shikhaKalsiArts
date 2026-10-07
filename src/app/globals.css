@@ -15,10 +15,20 @@
   }
 
   /*
-   * No `scroll-behavior: smooth` here on purpose: Lenis drives scrolling and
-   * routes anchor clicks itself. Running both engines makes them fight and
-   * produces the stutter this used to have.
+   * Native smooth scrolling, used only when an anchor is clicked — the wheel
+   * and trackpad keep the browser's own 1:1 behaviour.
+   *
+   * This previously ran through Lenis, which eased every scroll input. That
+   * momentum feel was removed deliberately; if it is ever reintroduced, this
+   * rule has to go at the same time, because two scroll engines fight each
+   * other and produce a stutter.
+   *
+   * Overridden to `auto` under prefers-reduced-motion below.
    */
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     font-family: var(--font-body);
     @apply bg-obsidian text-ivory antialiased;

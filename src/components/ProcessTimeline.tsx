@@ -120,7 +120,7 @@ export function ProcessTimeline() {
                   <h3 className="mt-5 font-display text-2xl text-ivory">
                     {stage.title}
                   </h3>
-                  <p className="mt-1 text-sm text-gold/70">{stage.subtitle}</p>
+                  <p className="mt-1 text-sm text-gold/90">{stage.subtitle}</p>
 
                   <p className="mt-4 text-ivory/65 leading-relaxed">
                     {stage.description}

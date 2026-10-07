@@ -67,7 +67,7 @@ export function PressMarquee() {
               key={item.title}
               className="rounded-2xl border border-line/40 bg-charcoal/40 p-7 transition-[border-color,transform] duration-[180ms] ease-[cubic-bezier(0.65,0,0.35,1)] hover:border-gold/40 hover:-translate-y-1"
             >
-              <span className="text-xs font-medium tracking-[0.2em] text-gold/70">
+              <span className="text-xs font-medium tracking-[0.2em] text-gold/90">
                 0{index + 1}
               </span>
               <h3 className="mt-4 font-display text-xl text-ivory">{item.title}</h3>

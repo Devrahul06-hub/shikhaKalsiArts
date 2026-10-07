@@ -17,7 +17,6 @@ import {
   LinkedInIcon,
   FacebookIcon,
 } from '@/components/icons/SocialIcons'
-import { useLenis } from '@/components/LenisProvider'
 import { socialLinks, whatsappUrl, WHATSAPP_DISPLAY } from '@/lib/contact'
 
 /**
@@ -44,7 +43,6 @@ export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
   const [isCondensed, setIsCondensed] = useState(false)
-  const lenis = useLenis()
   const pathname = usePathname()
   const onHome = pathname === '/'
 
@@ -103,22 +101,24 @@ export function Navbar() {
     setIsMobileMenuOpen(false)
   }, [pathname])
 
-  // Momentum scrolling has to be paused explicitly — overflow:hidden alone
-  // does not stop Lenis from scrolling the page behind the menu.
+  // Lock the page behind the menu. Restores the previous overflow rather than
+  // clearing it, so this never clobbers a value set elsewhere.
   useEffect(() => {
     if (!isMobileMenuOpen) return
 
-    lenis?.stop()
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') setIsMobileMenuOpen(false)
     }
     document.addEventListener('keydown', onKeyDown)
 
     return () => {
-      lenis?.start()
+      document.body.style.overflow = previousOverflow
       document.removeEventListener('keydown', onKeyDown)
     }
-  }, [isMobileMenuOpen, lenis])
+  }, [isMobileMenuOpen])
 
   return (
     <>
@@ -155,7 +155,7 @@ export function Navbar() {
               Shikha Kalsi Arts
             </span>
             <span
-              className={`hidden sm:block overflow-hidden text-[0.6rem] uppercase tracking-[0.35em] text-gold/70 transition-all duration-300 ${
+              className={`hidden sm:block overflow-hidden text-[0.6rem] uppercase tracking-[0.35em] text-gold/90 transition-all duration-300 ${
                 isCondensed ? 'max-h-0 opacity-0' : 'max-h-4 opacity-100 mt-1.5'
               }`}
             >

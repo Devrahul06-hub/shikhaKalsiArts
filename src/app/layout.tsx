@@ -5,7 +5,6 @@ import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
 import { JsonLd } from '@/components/JsonLd'
 import { siteUrl } from '@/lib/site'
-import { LenisProvider } from '@/components/LenisProvider'
 import MotionProvider from '@/components/MotionProvider'
 import { ScrollProgress } from '@/components/motion/ScrollProgress'
 
@@ -85,7 +84,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${fontDisplay.variable} ${fontBody.variable} scroll-smooth`}>
+    <html lang="en" className={`${fontDisplay.variable} ${fontBody.variable}`}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -93,7 +92,6 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
       </head>
       <body className="bg-obsidian text-ivory antialiased">
-        <LenisProvider>
           <MotionProvider>
           <a
             href="#main-content"
@@ -115,7 +113,6 @@ export default function RootLayout({
           <JsonLd type="ArtGallery" />
           <JsonLd type="LocalBusiness" />
           </MotionProvider>
-        </LenisProvider>
       </body>
     </html>
   )
