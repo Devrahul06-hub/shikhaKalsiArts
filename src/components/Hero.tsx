@@ -165,7 +165,7 @@ export function Hero() {
 
               <div className="relative aspect-[4/5] rounded-2xl overflow-hidden border border-line/50 shadow-[0_40px_80px_-30px_rgba(0,0,0,0.8)]">
                 <Image
-                  src="/assets/WhatsApp Image 2026-08-14 at 20.54.52.jpeg"
+                  src="/assets/seated-buddha-ivory.jpg"
                   alt="Seated Buddha sculpture hand-finished in the Shikha Kalsi Arts studio"
                   fill
                   className="object-cover"

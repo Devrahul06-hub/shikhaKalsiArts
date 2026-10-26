@@ -18,7 +18,7 @@ const telephone = `+${WHATSAPP_DISPLAY.replace(/[^\d]/g, '')}`
 const sharedDetails = {
   name: 'Shikha Kalsi Arts',
   url: baseUrl,
-  image: `${baseUrl}/assets/WhatsApp Image 2026-08-14 at 20.54.52.jpeg`,
+  image: `${baseUrl}/assets/seated-buddha-ivory.jpg`,
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Mumbai',

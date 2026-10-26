@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     description: 'Studio producing large-scale sculptures and architectural installations for commissions and public art.',
     images: [
       {
-        url: '/assets/WhatsApp Image 2026-08-14 at 20.54.51.jpeg',
+        url: '/assets/ganesha-polished-chrome.jpg',
         width: 1200,
         height: 630,
         alt: 'Shikha Kalsi Arts - Sculpture & Architectural Studio',
@@ -51,8 +51,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Shikha Kalsi Arts | Sculpture & Architectural Studio',
     description: 'Studio producing large-scale fiber composite sculptures and architectural installations for commissions, public art, and brand mascots.',
-    images: ['/assets/WhatsApp Image 2026-08-14 at 20.54.51.jpeg'],
-    creator: '@shikhakalsiarts',
+    images: ['/assets/ganesha-polished-chrome.jpg'],
   },
   robots: {
     index: true,

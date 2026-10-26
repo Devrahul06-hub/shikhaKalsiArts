@@ -35,7 +35,7 @@ export const works: Work[] = [
     description:
       'A flowing, abstracted interpretation of Ganesha, reduced to gesture and silhouette. The mirror-polished surface picks up the colour of the room around it, so the piece reads differently depending on where it is placed.',
     finish: 'Mirror-polished metallic',
-    image: '/assets/WhatsApp Image 2026-08-14 at 20.54.51.jpeg',
+    image: '/assets/ganesha-polished-chrome.jpg',
     alt: 'Abstract Ganesha sculpture with a mirror-polished chrome finish, displayed in an arched alcove',
   },
   {
@@ -46,7 +46,7 @@ export const works: Work[] = [
     description:
       'A seated Buddha in meditation, finished in a soft ivory tone that keeps attention on the fall of the robe and the stillness of the face. Shown here on a fluted plinth.',
     finish: 'Hand-finished ivory stone effect',
-    image: '/assets/WhatsApp Image 2026-08-14 at 20.54.52.jpeg',
+    image: '/assets/seated-buddha-ivory.jpg',
     alt: 'Seated Buddha sculpture in a pale ivory finish on a fluted column',
   },
   {
@@ -57,7 +57,7 @@ export const works: Work[] = [
     description:
       'A portrait head with eyes closed, contrasting a smooth terracotta face against heavily worked, bark-like hair. The two surface treatments are carried through in a single piece.',
     finish: 'Terracotta with textured relief',
-    image: '/assets/WhatsApp Image 2026-08-14 at 20.54.51 (1).jpeg',
+    image: '/assets/meditation-bust-terracotta.jpg',
     alt: 'Terracotta bust of a face with closed eyes and thickly textured sculpted hair',
   },
   {
@@ -68,7 +68,7 @@ export const works: Work[] = [
     description:
       'A framed relief panel carved in shallow depth, with an arched crown, patterned border, and attendant figures. Intended for wall mounting or a shrine niche.',
     finish: 'Natural terracotta',
-    image: '/assets/WhatsApp Image 2026-08-14 at 20.54.52 (1).jpeg',
+    image: '/assets/devotional-relief-panel.jpg',
     alt: 'Terracotta relief panel showing a seated deity with Ganesha within an arched frame',
   },
   {
@@ -79,7 +79,7 @@ export const works: Work[] = [
     description:
       'An eagle captured mid-lift, with individually worked feathers across the wings. Gold-leaf wings are set against a pewter-toned head and mounted on a rough stone base.',
     finish: 'Gold leaf and pewter, stone base',
-    image: '/assets/WhatsApp Image 2026-08-14 at 20.54.53.jpeg',
+    image: '/assets/winged-eagle-gold-leaf.jpg',
     alt: 'Sculpture of an eagle head with raised gold-leaf wings on a stone base',
   },
   {
@@ -90,7 +90,7 @@ export const works: Work[] = [
     description:
       'A small devotional piece: an infant Buddha resting inside an open lotus, finished in matte rose with gilded skin tones. The petals are worked individually.',
     finish: 'Matte rose with gilding',
-    image: '/assets/WhatsApp Image 2026-08-14 at 20.54.51 (2).jpeg',
+    image: '/assets/lotus-buddha-rose-gold.jpg',
     alt: 'Small sculpture of an infant Buddha in gold seated within a pink lotus flower',
   },
   {
@@ -101,7 +101,7 @@ export const works: Work[] = [
     description:
       'A commissioned likeness modelled from photographs of the owner’s dog, with the coat built up in texture and then hand-painted. Commissions of this kind are worked closely with the family.',
     finish: 'Sculpted and hand-painted',
-    image: '/assets/WhatsApp Image 2026-08-14 at 20.54.52 (2).jpeg',
+    image: '/assets/pet-portrait-dog.jpg',
     alt: 'Hand-painted sculpture of a small cream and gold dog, flanked by two candles',
   },
 ]

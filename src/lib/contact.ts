@@ -9,7 +9,7 @@ export const WHATSAPP_DISPLAY = '+91 81043 90986'
 export const socialLinks = {
   instagram: 'https://www.instagram.com/shikhakalsiarts/',
   linkedin: 'https://www.linkedin.com/company/shikha-kalsi-arts/',
-  facebook: 'https://www.facebook.com/share/v/14quA2z4ucn/?mibextid=wwXIfr',
+  facebook: 'https://www.facebook.com/shikha.kalsi.arts',
 } as const
 
 const DEFAULT_MESSAGE =

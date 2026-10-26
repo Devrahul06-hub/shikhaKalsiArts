@@ -26,11 +26,10 @@ import { socialLinks, whatsappUrl, WHATSAPP_DISPLAY } from '@/lib/contact'
  */
 const navLinks = [
   { id: 'home', label: 'Home', type: 'section' },
-  { id: 'gallery', label: 'Work', type: 'section' },
   { id: 'process', label: 'Process', type: 'section' },
-  { id: 'press', label: 'Studio', type: 'section' },
+  { id: 'studio', label: 'Studio', type: 'section' },
   { id: 'contact', label: 'Contact', type: 'section' },
-  { id: '/gallery', label: 'Catalogue', type: 'route' },
+  { id: '/gallery', label: 'Projects', type: 'route' },
 ] as const
 
 const socialIcons = [
@@ -288,7 +287,12 @@ export function Navbar() {
                   <WhatsAppIcon className="w-5 h-5" />
                   Enquire on WhatsApp
                 </a>
-                <p className="text-center text-xs text-ivory/60">{WHATSAPP_DISPLAY}</p>
+                <a
+                  href={`tel:+${WHATSAPP_DISPLAY.replace(/[^\d]/g, '')}`}
+                  className="block text-center text-xs text-ivory/60 transition-colors hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded-sm"
+                >
+                  {WHATSAPP_DISPLAY}
+                </a>
 
                 <div className="flex items-center justify-center gap-3">
                   {socialIcons.map(({ href, label, Icon }) => (

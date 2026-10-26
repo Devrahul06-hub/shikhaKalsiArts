@@ -34,7 +34,7 @@ const socials = [
 export function PressMarquee() {
   return (
     <section
-      id="press"
+      id="studio"
       className="relative py-24 lg:py-28 bg-obsidian border-t border-line/30"
       aria-labelledby="studio-heading"
     >

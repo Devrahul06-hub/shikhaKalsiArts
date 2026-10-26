@@ -989,7 +989,7 @@ export const collections: Collection[] = [
 
   // ─── Events & Scenography ────────────────────────────────────────────────
   {
-    id: 'isro-fleet',
+    id: 'rocket-photo-ops',
     title: 'Rockets & Astronauts',
     category: 'events',
     kind: 'Event scenography · Photo-op',
@@ -997,31 +997,31 @@ export const collections: Collection[] = [
       'A run of rockets and astronaut figures built as face-in-hole photo pieces for a public space event, cast in quantity and finished in flat colour.',
     images: [
       {
-        src: `${ASSET}/isro-astronauts-primed.jpg`,
+        src: `${ASSET}/astronauts-primed.jpg`,
         alt: 'A row of astronaut figures primed in white, standing outdoors',
         caption: 'The astronaut run cast and primed.',
         stage: 'In progress',
       },
       {
-        src: `${ASSET}/isro-rocket-painted.jpg`,
+        src: `${ASSET}/rocket-painted.jpg`,
         alt: 'A finished rocket sculpture painted white and red with a face cut-out',
         caption: 'A rocket finished, with the face cut-out.',
         stage: 'Finished',
       },
       {
-        src: `${ASSET}/isro-astronaut-painted.jpg`,
+        src: `${ASSET}/astronaut-suit-painted.jpg`,
         alt: 'A finished astronaut suit sculpture painted white with red trim and a face cut-out',
         caption: 'The astronaut suit finished to match.',
         stage: 'Finished',
       },
       {
-        src: `${ASSET}/isro-fleet-team.jpg`,
+        src: `${ASSET}/rocket-fleet-team.jpg`,
         alt: 'Two people kneeling in front of a large group of finished rockets and astronaut figures',
         caption: 'The full run before dispatch.',
         stage: 'Finished',
       },
       {
-        src: `${ASSET}/isro-installed-event.jpg`,
+        src: `${ASSET}/rockets-installed-event.jpg`,
         alt: 'Rocket and astronaut photo-op pieces installed at a public event with visitors posing',
         caption: 'In use at the event.',
         stage: 'Installed',

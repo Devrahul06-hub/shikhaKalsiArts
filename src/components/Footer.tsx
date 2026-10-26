@@ -21,10 +21,9 @@ const socials = [
 
 /** Anchors are relative to the home page, so they need a "/" prefix elsewhere. */
 const exploreLinks = [
-  { label: 'Recent Work', href: '/gallery', type: 'route' },
-  { label: 'Featured Work', href: 'gallery', type: 'section' },
+  { label: 'All Projects', href: '/gallery', type: 'route' },
   { label: 'Our Process', href: 'process', type: 'section' },
-  { label: 'The Studio', href: 'press', type: 'section' },
+  { label: 'The Studio', href: 'studio', type: 'section' },
 ] as const
 
 export function Footer() {

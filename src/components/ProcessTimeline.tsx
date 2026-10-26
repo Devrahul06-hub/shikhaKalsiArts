@@ -16,8 +16,8 @@ const stages = [
     description:
       'It starts with a conversation — a photograph, a deity, a likeness, or the corner the piece has to live in. Scale, finish, and budget are agreed before any modelling begins.',
     points: ['Reference images and inspiration', 'Scale and placement', 'Finish and budget'],
-    image: '/assets/WhatsApp Image 2026-08-14 at 20.54.51 (1).jpeg',
-    alt: 'Terracotta bust in progress, showing modelled facial detail',
+    image: '/assets/catalogue/knee-sculpture-maquette.jpg',
+    alt: 'A small maquette on a stand with a correction mark drawn over it, used to sign off the form',
   },
   {
     id: 'modelling',
@@ -28,8 +28,8 @@ const stages = [
     description:
       'The form is built up and refined by hand, with proportion and expression resolved at this stage. Progress photographs are shared so changes happen before the surface is sealed.',
     points: ['Form and proportion', 'Expression and detail', 'Progress shared for approval'],
-    image: '/assets/WhatsApp Image 2026-08-14 at 20.54.52 (1).jpeg',
-    alt: 'Terracotta relief panel of a deity, showing hand-modelled detail',
+    image: '/assets/catalogue/dhyana-clay-modelling.jpg',
+    alt: 'A sculptor modelling the raised arm of a life-size clay figure in the studio',
   },
   {
     id: 'finishing',
@@ -40,8 +40,8 @@ const stages = [
     description:
       'Surface treatment is where each piece takes on its character — terracotta left bare, a stone-effect ivory, mirror-polished metal, or gold leaf applied by hand.',
     points: ['Surface preparation', 'Hand-painting and patination', 'Gilding and polishing'],
-    image: '/assets/WhatsApp Image 2026-08-14 at 20.54.53.jpeg',
-    alt: 'Eagle sculpture with gold-leaf wings and a pewter-toned head',
+    image: '/assets/catalogue/dhyana-painting-teal-gold.jpg',
+    alt: 'A cast figure being hand-painted in teal and gold in the studio yard',
   },
   {
     id: 'delivery',
@@ -52,8 +52,8 @@ const stages = [
     description:
       'Finished work is photographed, crated to suit its fragility, and dispatched. Larger pieces are placed on site so the final position is right before handover.',
     points: ['Final photography', 'Protective crating', 'Placement and handover'],
-    image: '/assets/WhatsApp Image 2026-08-14 at 20.54.52.jpeg',
-    alt: 'Completed seated Buddha sculpture displayed on a plinth',
+    image: '/assets/catalogue/temple-elephants-installed.jpg',
+    alt: 'Finished elephant sculptures installed either side of a carved temple entrance',
   },
 ]
 
