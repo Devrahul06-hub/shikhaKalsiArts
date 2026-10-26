@@ -327,6 +327,46 @@ export const collections: Collection[] = [
     ],
   },
   {
+    id: 'anime-character-figure',
+    title: 'Life-Size Anime Character Figure',
+    category: 'brand',
+    kind: 'Character figure · Display',
+    summary:
+      'A standing anime character built at full height from a single reference poster, worked up in the round, filled and sanded smooth, then masked and hand-painted in flat colour to match the artwork.',
+    images: [
+      {
+        src: `${ASSET}/anime-figure-filling.jpg`,
+        alt: 'A sculptor applying filler to the grey form of a life-size standing character figure, with the reference poster on the wall behind',
+        caption: 'Filler worked over the form, checked against the reference.',
+        stage: 'In progress',
+      },
+      {
+        src: `${ASSET}/anime-figure-primed.jpg`,
+        alt: 'The character figure primed in white and sanded back, standing beside its reference poster',
+        caption: 'Primed and sanded back until the surface reads clean.',
+        stage: 'In progress',
+      },
+      {
+        src: `${ASSET}/anime-figure-base-coat.jpg`,
+        alt: 'The figure part-painted in orange with the head, hands and forearms masked off',
+        caption: 'Base colour laid down, head and hands masked off.',
+        stage: 'Finishing',
+      },
+      {
+        src: `${ASSET}/anime-figure-finished.jpg`,
+        alt: 'The finished life-size character figure painted in orange and blue, lit in the studio',
+        caption: 'Finished and lit in the studio — roughly life size.',
+        stage: 'Finished',
+      },
+      {
+        src: `${ASSET}/anime-figure-detail.jpg`,
+        alt: 'Close view of the finished figure’s head and shoulders, showing the painted face and hair',
+        caption: 'The face and hair, hand-painted.',
+        stage: 'Finished',
+      },
+    ],
+  },
+  {
     id: 'giant-sneaker',
     title: 'Oversized Sneaker',
     category: 'brand',
