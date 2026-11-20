@@ -7,10 +7,7 @@
  * when the studio supplies real values.
  */
 
-export type WorkCategory =
-  | 'Devotional'
-  | 'Figurative'
-  | 'Commissioned Portraits'
+export type WorkCategory = 'Devotional' | 'Figurative'
 
 export interface Work {
   id: string
@@ -93,25 +90,9 @@ export const works: Work[] = [
     image: '/assets/lotus-buddha-rose-gold.jpg',
     alt: 'Small sculpture of an infant Buddha in gold seated within a pink lotus flower',
   },
-  {
-    id: 'pet-portrait',
-    title: 'Pet Portrait Commission',
-    category: 'Commissioned Portraits',
-    summary: 'Hand-painted likeness of a dog, sculpted from photographs.',
-    description:
-      'A commissioned likeness modelled from photographs of the owner’s dog, with the coat built up in texture and then hand-painted. Commissions of this kind are worked closely with the family.',
-    finish: 'Sculpted and hand-painted',
-    image: '/assets/pet-portrait-dog.jpg',
-    alt: 'Hand-painted sculpture of a small cream and gold dog, flanked by two candles',
-  },
 ]
 
-export const workCategories = [
-  'All',
-  'Devotional',
-  'Figurative',
-  'Commissioned Portraits',
-] as const
+export const workCategories = ['All', 'Devotional', 'Figurative'] as const
 
 export type WorkFilter = (typeof workCategories)[number]
 

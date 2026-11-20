@@ -688,10 +688,26 @@ export const collections: Collection[] = [
         caption: 'Both finished in a bronze patina.',
         stage: 'Finished',
       },
+    ],
+  },
+  {
+    id: 'animal-portraits',
+    title: 'Animal Portraits & Figures',
+    category: 'animals',
+    kind: 'Commissioned portrait · Figure',
+    summary:
+      'One-off animal pieces: a likeness modelled from the owner’s photographs, and standalone character figures finished by hand.',
+    images: [
+      {
+        src: `${ASSET}/pet-portrait-dog.jpg`,
+        alt: 'Hand-painted sculpture of a small cream and gold dog, flanked by two candles',
+        caption: 'A pet likeness modelled from the owner’s photographs.',
+        stage: 'Finished',
+      },
       {
         src: `${ASSET}/rabbit-figure-finished.jpg`,
         alt: 'A large pale rabbit figure with a patterned tie, seen from behind in the yard',
-        caption: 'A companion rabbit figure, hand-painted detail.',
+        caption: 'A standalone rabbit figure, hand-painted detail.',
         stage: 'Finished',
       },
     ],

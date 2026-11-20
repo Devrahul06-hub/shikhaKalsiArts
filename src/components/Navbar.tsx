@@ -27,6 +27,7 @@ import { socialLinks, whatsappUrl, WHATSAPP_DISPLAY } from '@/lib/contact'
 const navLinks = [
   { id: 'home', label: 'Home', type: 'section' },
   { id: 'process', label: 'Process', type: 'section' },
+  { id: 'international', label: 'Export', type: 'section' },
   { id: 'studio', label: 'Studio', type: 'section' },
   { id: 'contact', label: 'Contact', type: 'section' },
   { id: '/gallery', label: 'Projects', type: 'route' },

@@ -59,9 +59,9 @@ export function Footer() {
           </RevealItem>
           <RevealItem>
             <p className="mt-6 text-ivory/60 leading-relaxed max-w-xl">
-              The studio takes on a limited number of commissions each year. Send a
-              message on WhatsApp with your site, scale, and timeline — Shikha replies
-              personally.
+              Tell us the piece, the scale and where it is going. Send a reference
+              image or drawing and we will come back with a quotation — one-off
+              commissions and production runs both welcome.
             </p>
           </RevealItem>
 

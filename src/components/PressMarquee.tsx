@@ -19,10 +19,6 @@ const commissionTypes = [
     title: 'Portrait commissions',
     body: 'Likenesses of people and pets, modelled from your photographs and hand-painted.',
   },
-  {
-    title: 'Bespoke gifting',
-    body: 'One-off pieces for weddings, housewarmings, and corporate gifting.',
-  },
 ]
 
 const socials = [
@@ -51,9 +47,10 @@ export function PressMarquee() {
             <span className="text-gold"> by hand</span>
           </h2>
           <p className="mt-5 text-ivory/60 leading-relaxed">
-            Shikha Kalsi works from her studio in Mumbai, taking on a limited number
-            of commissions so each piece gets the time it needs — from the first
-            reference image through modelling, finishing, and final painting.
+            Shikha Kalsi works from her studio in Mumbai. Every project is
+            planned, modelled and finished here — from the first reference image
+            through modelling, moulding, finishing and final painting — at any
+            scale, from a single piece to a production run.
           </p>
         </Reveal>
 
