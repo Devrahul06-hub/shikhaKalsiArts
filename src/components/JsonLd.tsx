@@ -1,4 +1,4 @@
-import { socialLinks, WHATSAPP_DISPLAY } from '@/lib/contact'
+import { socialLinks, EMAIL, WHATSAPP_DISPLAY } from '@/lib/contact'
 import { siteUrl } from '@/lib/site'
 
 /**
@@ -26,6 +26,7 @@ const sharedDetails = {
     addressCountry: 'IN',
   },
   telephone,
+  email: EMAIL,
   sameAs: [socialLinks.instagram, socialLinks.linkedin, socialLinks.facebook],
 }
 

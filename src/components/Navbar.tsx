@@ -10,14 +10,20 @@ import {
 } from 'framer-motion'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, Mail } from 'lucide-react'
 import { WhatsAppIcon } from '@/components/icons/WhatsAppIcon'
 import {
   InstagramIcon,
   LinkedInIcon,
   FacebookIcon,
 } from '@/components/icons/SocialIcons'
-import { socialLinks, whatsappUrl, WHATSAPP_DISPLAY } from '@/lib/contact'
+import {
+  socialLinks,
+  whatsappUrl,
+  emailUrl,
+  EMAIL,
+  WHATSAPP_DISPLAY,
+} from '@/lib/contact'
 
 /**
  * `section` links point at anchors on the home page; `route` links are real
@@ -289,11 +295,27 @@ export function Navbar() {
                   Enquire on WhatsApp
                 </a>
                 <a
-                  href={`tel:+${WHATSAPP_DISPLAY.replace(/[^\d]/g, '')}`}
-                  className="block text-center text-xs text-ivory/60 transition-colors hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded-sm"
+                  href={emailUrl()}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center justify-center gap-2 w-full py-4 rounded-full border border-gold/70 text-ivory font-medium transition-colors hover:bg-gold/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
                 >
-                  {WHATSAPP_DISPLAY}
+                  <Mail className="w-5 h-5" aria-hidden="true" />
+                  Email the studio
                 </a>
+                <div className="space-y-1.5">
+                  <a
+                    href={`mailto:${EMAIL}`}
+                    className="block text-center text-xs text-ivory/60 transition-colors hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded-sm"
+                  >
+                    {EMAIL}
+                  </a>
+                  <a
+                    href={`tel:+${WHATSAPP_DISPLAY.replace(/[^\d]/g, '')}`}
+                    className="block text-center text-xs text-ivory/60 transition-colors hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded-sm"
+                  >
+                    {WHATSAPP_DISPLAY}
+                  </a>
+                </div>
 
                 <div className="flex items-center justify-center gap-3">
                   {socialIcons.map(({ href, label, Icon }) => (

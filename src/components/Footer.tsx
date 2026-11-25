@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { ArrowUp } from 'lucide-react'
+import { ArrowUp, Mail } from 'lucide-react'
 import { Reveal, RevealItem } from '@/components/motion/Reveal'
 import { stagger } from '@/lib/motion'
 import { WhatsAppIcon } from '@/components/icons/WhatsAppIcon'
@@ -11,7 +11,13 @@ import {
   LinkedInIcon,
   FacebookIcon,
 } from '@/components/icons/SocialIcons'
-import { socialLinks, whatsappUrl, WHATSAPP_DISPLAY } from '@/lib/contact'
+import {
+  socialLinks,
+  whatsappUrl,
+  emailUrl,
+  EMAIL,
+  WHATSAPP_DISPLAY,
+} from '@/lib/contact'
 
 const socials = [
   { name: 'Instagram', href: socialLinks.instagram, Icon: InstagramIcon },
@@ -65,25 +71,55 @@ export function Footer() {
             </p>
           </RevealItem>
 
+          {/* Email leads: overseas buyers often will not open a project on
+              WhatsApp, which is why the site was WhatsApp-only until now. */}
           <RevealItem
             distance={20}
             className="mt-9 flex flex-col sm:flex-row items-stretch sm:items-center gap-4"
           >
             <a
+              href={emailUrl()}
+              className="btn-primary inline-flex items-center justify-center gap-2.5 focus-visible:ring-offset-charcoal"
+            >
+              <Mail className="w-5 h-5" aria-hidden="true" />
+              Email the studio
+            </a>
+            <a
               href={whatsappUrl()}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary inline-flex items-center justify-center gap-2.5 focus-visible:ring-offset-charcoal"
+              className="btn-secondary inline-flex items-center justify-center gap-2.5 focus-visible:ring-offset-charcoal"
             >
               <WhatsAppIcon className="w-5 h-5" />
-              Enquire on WhatsApp
+              WhatsApp
             </a>
-            <a
-              href={`tel:+${WHATSAPP_DISPLAY.replace(/[^\d]/g, '')}`}
-              className="btn-secondary text-center focus-visible:ring-offset-charcoal"
-            >
-              {WHATSAPP_DISPLAY}
-            </a>
+          </RevealItem>
+
+          <RevealItem distance={16}>
+            <dl className="mt-8 flex flex-col sm:flex-row sm:flex-wrap gap-x-10 gap-y-3 text-sm">
+              <div className="flex items-baseline gap-2.5">
+                <dt className="text-ivory/50">Email</dt>
+                <dd>
+                  <a
+                    href={`mailto:${EMAIL}`}
+                    className="text-ivory/80 transition-colors hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded-sm"
+                  >
+                    {EMAIL}
+                  </a>
+                </dd>
+              </div>
+              <div className="flex items-baseline gap-2.5">
+                <dt className="text-ivory/50">Phone</dt>
+                <dd>
+                  <a
+                    href={`tel:+${WHATSAPP_DISPLAY.replace(/[^\d]/g, '')}`}
+                    className="text-ivory/80 transition-colors hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded-sm"
+                  >
+                    {WHATSAPP_DISPLAY}
+                  </a>
+                </dd>
+              </div>
+            </dl>
           </RevealItem>
         </Reveal>
 
